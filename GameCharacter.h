@@ -27,11 +27,7 @@ public:
         return posY;
     }
 
-    void move(int x, int y) override{
-        posX += x;
-        posY += y;
-        notify();
-    }
+    void move(int x, int y) override;
 
     void notify() const override{
         observer->update();

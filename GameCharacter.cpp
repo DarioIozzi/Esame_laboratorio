@@ -3,3 +3,9 @@
 //
 
 #include "GameCharacter.h"
+
+void GameCharacter::move(int x, int y) {
+    posX += x;
+    posY += y;
+    notify();
+}
