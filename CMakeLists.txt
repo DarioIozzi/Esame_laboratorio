@@ -3,7 +3,7 @@ project(Esame_laboratorio)
 
 set(CMAKE_CXX_STANDARD 14)
 
-add_executable(Esame_laboratorio main.cpp)
+add_executable(Esame_laboratorio main.cpp GameCharacter.cpp GameCharacter.h Observer.cpp Observer.h Subject.cpp Subject.h View.cpp View.h Controller.cpp Controller.h)
 
 include_directories(usr/local/include)
 
