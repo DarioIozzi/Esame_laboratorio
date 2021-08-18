@@ -8,6 +8,7 @@
 
 #include <iostream>
 #include "GameCharacter.h"
+#include "MapView.h"
 
 enum class GameEvent{
     quit, left, up, right, down, noop
@@ -15,16 +16,16 @@ enum class GameEvent{
 
 class Controller {
 public:
-    explicit Controller(GameCharacter* p) : pg(p) {}
+    explicit Controller();
     ~Controller() {
         delete pg;
     }
-
     GameEvent getEvent();
     bool update(const GameEvent& event);
 
 private:
     GameCharacter* pg;
+    MapView* map;
 };
 
 

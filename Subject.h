@@ -6,6 +6,8 @@
 #define ESAME_LABORATORIO_SUBJECT_H
 
 
+#include <list>
+
 class Subject {
 public:
     Subject() {}
@@ -13,6 +15,8 @@ public:
 
     virtual void move(int x, int y) = 0;
     virtual void notify() const = 0;
+    virtual void subscribe(Observer* o) = 0;
+    virtual void unsubscribe(Observer* o) = 0;
 };
 
 

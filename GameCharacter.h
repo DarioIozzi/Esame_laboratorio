@@ -9,15 +9,12 @@
 #include "Observer.h"
 #include "Subject.h"
 #include <memory>
+#include <list>
 
 class GameCharacter : public Subject{
 public:
-    explicit GameCharacter(int x = 0, int y = 0, Observer* obs = nullptr) : posX(x), posY(y)  {
-        observer = obs;
-    }
-    ~GameCharacter() override {
-        delete observer;
-    };
+    explicit GameCharacter() : posX(0), posY(0) {}
+    ~GameCharacter() override {}
 
     int getPosX() const {
         return posX;
@@ -29,13 +26,14 @@ public:
 
     void move(int x, int y) override;
 
-    void notify() const override{
-        observer->update();
-    }
+    void subscribe(Observer* o) override;
+    void unsubscribe(Observer* o) override;
+
+    void notify() const override;
 
 private:
     int posX, posY;
-    Observer* observer;
+    std::list<Observer*> observers;
 };
 
 #endif //ESAME_LABORATORIO_GAMECHARACTER_H
