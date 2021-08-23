@@ -16,7 +16,7 @@ enum class GameEvent{
 
 class Controller {
 public:
-    explicit Controller() {}
+    explicit Controller();
     ~Controller() {
         delete pg;
     }
