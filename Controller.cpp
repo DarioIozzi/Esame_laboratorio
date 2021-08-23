@@ -5,7 +5,7 @@
 #include "Controller.h"
 
 
-GameEvent Controller::getEvent() {
+GameEvent Controller::getEvent() const {
     char c;
     while(std::cin.get(c)){
         std::cin.ignore(100, '\n');
@@ -30,23 +30,34 @@ GameEvent Controller::getEvent() {
 bool Controller::update(const GameEvent &event) {
     {
         switch(event){
-            case GameEvent::up:
+            case GameEvent::up: {
                 pg->move(0, 1);
                 break;
-                case GameEvent::right:
-                    pg->move(1, 0);
-                    break;
-                    case GameEvent::down:
-                        pg->move(0, -1);
-                        break;
-                        case GameEvent::left:
-                            pg->move(-1, 0);
-                            break;
-                            case GameEvent::quit:
-                                return true;
-                                case GameEvent::noop:
-                                    break;
+            }
+            case GameEvent::right: {
+                pg->move(1, 0);
+                break;
+            }
+            case GameEvent::down: {
+                pg->move(0, -1);
+                break;
+            }
+            case GameEvent::left: {
+                pg->move(-1, 0);
+                break;
+            }
+            case GameEvent::quit: {
+                return true;
+            }
+            case GameEvent::noop: {
+                break;
+            }
         }
         return false;
     }
+}
+
+Controller::Controller() {
+    pg = new GameCharacter;
+    map = new MapView(pg);
 }
