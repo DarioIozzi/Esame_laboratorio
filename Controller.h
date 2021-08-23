@@ -16,10 +16,11 @@ enum class GameEvent{
 
 class Controller {
 public:
-    explicit Controller();
+    explicit Controller() {}
     ~Controller() {
         delete pg;
     }
+
     GameEvent getEvent() const;
     bool update(const GameEvent& event);
 
