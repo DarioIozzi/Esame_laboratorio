@@ -3,10 +3,12 @@
 //
 
 #include "MapView.h"
-#include <iostream>
 
 void MapView::draw(int posx, int posy) {
-    std::cout << "Coordinate x: " << posx << " y: " << posy << std::endl;
+    shape.setOrigin(posx, posy);
+    window->clear();
+    window->draw(shape);
+    window->display();
 }
 
 void MapView::update() {
@@ -15,9 +17,16 @@ void MapView::update() {
     draw(posx, posy);
 }
 
-MapView::MapView(GameCharacter *p) : pg(p){
+MapView::MapView(GameCharacter *p, sf::RenderWindow* w) : pg(p){
     pg->subscribe(this);
+    shape.setRadius(100);
+    shape.setFillColor(sf::Color::Red);
+    window = w;
+    window->clear();
+    window->draw(shape);
+    window->display();
 }
+
  MapView::~MapView() {
     pg->unsubscribe(this);
 }

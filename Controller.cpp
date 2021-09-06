@@ -3,61 +3,20 @@
 //
 
 #include "Controller.h"
+#include <SFML/Graphics.hpp>
 
-
-GameEvent Controller::getEvent() const {
-    char c;
-    while(std::cin.get(c)){
-        std::cin.ignore(100, '\n');
-        switch (c){
-            case 'Q':
-                return GameEvent::quit;
-            case 'w':
-                return GameEvent::up;
-            case 'a':
-                return GameEvent::left;
-            case 's':
-                return GameEvent::down;
-            case 'd':
-                return GameEvent::right;
-            default:
-                return GameEvent::noop;
-        }
-    }
-    return GameEvent::noop;
+void Controller::Commands() {
+    if(sf::Keyboard::isKeyPressed(sf::Keyboard::A))
+        pg->move(1, 0);
+    if(sf::Keyboard::isKeyPressed(sf::Keyboard::D))
+        pg->move(-1, 0);
+    if(sf::Keyboard::isKeyPressed(sf::Keyboard::W))
+        pg->move(0, 1);
+    if(sf::Keyboard::isKeyPressed(sf::Keyboard::S))
+        pg->move(0, -1);
 }
 
-bool Controller::update(const GameEvent &event) {
-    {
-        switch(event){
-            case GameEvent::up: {
-                pg->move(0, 1);
-                break;
-            }
-            case GameEvent::right: {
-                pg->move(1, 0);
-                break;
-            }
-            case GameEvent::down: {
-                pg->move(0, -1);
-                break;
-            }
-            case GameEvent::left: {
-                pg->move(-1, 0);
-                break;
-            }
-            case GameEvent::quit: {
-                return true;
-            }
-            case GameEvent::noop: {
-                break;
-            }
-        }
-        return false;
-    }
-}
-
-Controller::Controller() {
+Controller::Controller(sf::RenderWindow* w) {
     pg = new GameCharacter;
-    map = new MapView(pg);
+    map = new MapView(pg, w);
 }

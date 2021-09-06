@@ -10,19 +10,14 @@
 #include "GameCharacter.h"
 #include "MapView.h"
 
-enum class GameEvent{
-    quit, left, up, right, down, noop
-};
-
 class Controller {
 public:
-    explicit Controller();
+    explicit Controller(sf::RenderWindow* window);
     ~Controller() {
         delete pg;
     }
 
-    GameEvent getEvent() const;
-    bool update(const GameEvent& event);
+    void Commands();
 
 private:
     GameCharacter* pg;

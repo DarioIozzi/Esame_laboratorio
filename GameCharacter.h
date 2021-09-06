@@ -13,7 +13,7 @@
 
 class GameCharacter : public Subject{
 public:
-    explicit GameCharacter() : posX(0), posY(0) {}
+    explicit GameCharacter();
     ~GameCharacter() override {}
 
     int getPosX() const {
