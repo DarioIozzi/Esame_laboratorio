@@ -13,14 +13,13 @@
 class Controller {
 public:
     explicit Controller(sf::RenderWindow* window);
-    ~Controller() {
-        delete pg;
-    }
+    ~Controller() {    }
 
     void Commands();
 
 private:
     GameCharacter* pg;
+    GameCharacter* enemy;
     MapView* map;
 };
 

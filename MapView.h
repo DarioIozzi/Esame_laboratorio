@@ -12,7 +12,7 @@
 
 class MapView : public Observer, public Display{
 public:
-    explicit MapView(GameCharacter* p, sf::RenderWindow* w);
+    explicit MapView(GameCharacter* p, GameCharacter* e, sf::RenderWindow* w);
     ~MapView() override;
 
     void update() override;
@@ -20,7 +20,9 @@ public:
     void draw(int posx, int posy) override;
 private:
     GameCharacter* pg;
-    sf::CircleShape shape;
+    GameCharacter* enemy;
+    sf::CircleShape pgShape;
+    sf::RectangleShape enemyShape;
     sf::RenderWindow* window;
 };
 

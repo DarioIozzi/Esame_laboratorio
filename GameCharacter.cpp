@@ -2,13 +2,14 @@
 // Created by dario on 12/08/21.
 //
 
-#include <SFML/Graphics.hpp>
 #include "GameCharacter.h"
 
 void GameCharacter::move(int x, int y) {
-    posX += x;
-    posY += y;
-    notify();
+    if(abs(posX + x) < MAP_WIDTH && abs(posY +y) < MAP_HEIGHT) {
+        posX += x;
+        posY += y;
+        notify();
+    }
 }
 
 void GameCharacter::subscribe(Observer* o) {
@@ -25,9 +26,5 @@ void GameCharacter::notify() const {
     }
 }
 
-GameCharacter::GameCharacter() {
-    posX = 0;
-    posY = 0;
-    //sf::Texture texture;
-    //texture.loadFromFile("image.png");
+GameCharacter::GameCharacter(int x, int y) : posX(x), posY(y) {
 }

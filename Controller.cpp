@@ -17,6 +17,7 @@ void Controller::Commands() {
 }
 
 Controller::Controller(sf::RenderWindow* w) {
-    pg = new GameCharacter;
-    map = new MapView(pg, w);
+    pg = new GameCharacter(0, 0);
+    enemy = new GameCharacter(10, 15);
+    map = new MapView(pg, enemy, w);
 }

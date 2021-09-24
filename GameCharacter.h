@@ -8,12 +8,13 @@
 
 #include "Observer.h"
 #include "Subject.h"
+#include "Findpath.h"
 #include <memory>
 #include <list>
 
 class GameCharacter : public Subject{
 public:
-    explicit GameCharacter();
+    GameCharacter(int x, int y);
     ~GameCharacter() override {}
 
     int getPosX() const {

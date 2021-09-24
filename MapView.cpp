@@ -5,9 +5,10 @@
 #include "MapView.h"
 
 void MapView::draw(int posx, int posy) {
-    shape.setOrigin(posx, posy);
+    pgShape.setOrigin(posx, posy);
     window->clear();
-    window->draw(shape);
+    window->draw(pgShape);
+    window->draw(enemyShape);
     window->display();
 }
 
@@ -17,13 +18,18 @@ void MapView::update() {
     draw(posx, posy);
 }
 
-MapView::MapView(GameCharacter *p, sf::RenderWindow* w) : pg(p){
+MapView::MapView(GameCharacter *p, GameCharacter* e, sf::RenderWindow* w) : pg(p), enemy(e){
     pg->subscribe(this);
-    shape.setRadius(100);
-    shape.setFillColor(sf::Color::Red);
+    pgShape.setRadius(40);
+    pgShape.setOrigin(pg->getPosX(), pg->getPosY());
+    pgShape.setFillColor(sf::Color::Red);
+    enemyShape.setSize(sf::Vector2f(80.f, 55.f));
+    enemyShape.setOrigin(enemy->getPosX(), enemy->getPosY());
+    enemyShape.setFillColor(sf::Color::White);
     window = w;
     window->clear();
-    window->draw(shape);
+    window->draw(enemyShape);
+    window->draw(pgShape);
     window->display();
 }
 
