@@ -1,21 +1,51 @@
+/*
+A* Algorithm Implementation using STL is
+Copyright (C)2001-2005 Justin Heyes-Jones
+
+Permission is given by the author to freely redistribute and
+include this code in any program as long as this credit is
+given where due.
+
+  COVERED CODE IS PROVIDED UNDER THIS LICENSE ON AN "AS IS" BASIS,
+  WITHOUT WARRANTY OF ANY KIND, EITHER EXPRESSED OR IMPLIED,
+  INCLUDING, WITHOUT LIMITATION, WARRANTIES THAT THE COVERED CODE
+  IS FREE OF DEFECTS, MERCHANTABLE, FIT FOR A PARTICULAR PURPOSE
+  OR NON-INFRINGING. THE ENTIRE RISK AS TO THE QUALITY AND
+  PERFORMANCE OF THE COVERED CODE IS WITH YOU. SHOULD ANY COVERED
+  CODE PROVE DEFECTIVE IN ANY RESPECT, YOU (NOT THE INITIAL
+  DEVELOPER OR ANY OTHER CONTRIBUTOR) ASSUME THE COST OF ANY
+  NECESSARY SERVICING, REPAIR OR CORRECTION. THIS DISCLAIMER OF
+  WARRANTY CONSTITUTES AN ESSENTIAL PART OF THIS LICENSE. NO USE
+  OF ANY COVERED CODE IS AUTHORIZED HEREUNDER EXCEPT UNDER
+  THIS DISCLAIMER.
+
+  Use at your own risk!
+
+*/
+
 #ifndef STLASTAR_H
 #define STLASTAR_H
-
+// used for text debugging
 #include <iostream>
-#include <cstdio>
-#include <cassert>
+#include <stdio.h>
+//#include <conio.h>
+#include <assert.h>
 
-
+// stl includes
 #include <algorithm>
-#include <set>
+#include <unordered_set>
 #include <vector>
 #include <cfloat>
 
-using namespace std;
+// fast fixed size memory allocator, used for fast node memory management
+#include "fsa.h"
 
-#include "Fsa.h"
+// Fixed size memory allocator can be disabled to compare performance
+// Uses std new and delete instead if you turn it off
 #define USE_FSA_MEMORY 1
 
+// disable warning that debugging information has lines that are truncated
+// occurs in stl headers
 #if defined(WIN32) && defined(_WINDOWS)
 #pragma warning( disable : 4786 )
 #endif
@@ -51,7 +81,7 @@ public:
         Node *parent; // used during the search to record the parent of successor nodes
         Node *child; // used after the search for the application to view the search in reverse
 
-        float g; // cost of this node + it's predecessors
+        float g; // cost of this node + its predecessors
         float h; // heuristic estimate of distance to goal
         float f; // sum of cumulative cost of predecessors and self and heuristic
 
@@ -64,9 +94,13 @@ public:
         {
         }
 
+        bool operator==(const Node& otherNode) const
+        {
+            return this->m_UserState.IsSameState(otherNode->m_UserState);
+        }
+
         UserState m_UserState;
     };
-
 
     // For sorting the heap the STL needs compare function that lets us compare
     // the f value of two nodes
@@ -97,7 +131,7 @@ public: // methods
     {
     }
 
-    explicit AStarSearch( int MaxNodes ) :
+    AStarSearch( int MaxNodes ) :
             m_State( SEARCH_STATE_NOT_INITIALISED ),
             m_CurrentSolutionNode( NULL ),
 #if USE_FSA_MEMORY
@@ -255,7 +289,6 @@ public: // methods
             // Now handle each successor to the current node ...
             for( typename vector< Node * >::iterator successor = m_Successors.begin(); successor != m_Successors.end(); successor ++ )
             {
-
                 // 	The g value for this successor ...
                 float newg = n->g + n->m_UserState.GetCost( (*successor)->m_UserState );
 
@@ -288,16 +321,9 @@ public: // methods
                         continue;
                     }
                 }
+                typename unordered_set<Node*, NodeHash, NodeEqual>::iterator closedlist_result;
 
-                typename vector< Node * >::iterator closedlist_result;
-
-                for( closedlist_result = m_ClosedList.begin(); closedlist_result != m_ClosedList.end(); closedlist_result ++ )
-                {
-                    if( (*closedlist_result)->m_UserState.IsSameState( (*successor)->m_UserState ) )
-                    {
-                        break;
-                    }
-                }
+                closedlist_result = m_ClosedList.find(*successor);
 
                 if( closedlist_result != m_ClosedList.end() )
                 {
@@ -394,7 +420,7 @@ public: // methods
 
             // push n onto Closed, as we have expanded it now
 
-            m_ClosedList.push_back( n );
+            m_ClosedList.insert( n );
 
         } // end else (not goal so expand)
 
@@ -651,7 +677,7 @@ private: // methods
         m_OpenList.clear();
 
         // iterate closed list and delete unused nodes
-        typename vector< Node * >::iterator iterClosed;
+        typename unordered_set<Node*, NodeHash, NodeEqual>::iterator iterClosed;
 
         for( iterClosed = m_ClosedList.begin(); iterClosed != m_ClosedList.end(); iterClosed ++ )
         {
@@ -692,7 +718,7 @@ private: // methods
         m_OpenList.clear();
 
         // iterate closed list and delete unused nodes
-        typename vector< Node * >::iterator iterClosed;
+        typename unordered_set<Node*, NodeHash, NodeEqual>::iterator iterClosed;
 
         for( iterClosed = m_ClosedList.begin(); iterClosed != m_ClosedList.end(); iterClosed ++ )
         {
@@ -749,8 +775,19 @@ private: // data
     // Heap (simple vector but used as a heap, cf. Steve Rabin's game gems article)
     vector< Node *> m_OpenList;
 
-    // Closed list is a vector.
-    vector< Node * > m_ClosedList;
+    // Closed is an unordered_set
+    struct NodeHash {
+        size_t operator() (Node* const& n) const {
+            return n->m_UserState.Hash();
+        }
+    };
+    struct NodeEqual {
+        bool operator()(Node* a, Node* b) const {
+            return a->m_UserState.IsSameState(b->m_UserState);
+        }
+    };
+    unordered_set<Node*, NodeHash, NodeEqual> m_ClosedList;
+
 
     // Successors is a vector filled out by the user each type successors to a node
     // are generated
@@ -794,8 +831,7 @@ public:
     virtual bool GetSuccessors( AStarSearch<T> *astarsearch, T *parent_node ) = 0; // Retrieves all successors to this node and adds them via astarsearch.addSuccessor()
     virtual float GetCost( T &successor ) = 0; // Computes the cost of travelling from this node to the successor node
     virtual bool IsSameState( T &rhs ) = 0; // Returns true if this node is the same as the rhs node
+    virtual size_t Hash() = 0; // Returns a hash for the state
 };
 
 #endif
-
-
