@@ -6,7 +6,7 @@
 #include <SFML/Graphics.hpp>
 
 void Controller::Commands() {
-    if(sf::Keyboard::isKeyPressed(sf::Keyboard::A))
+    if(sf::Keyboard::isKeyPressed(sf::Keyboard::A))      //TODO modificare lo spostamento
         pg->move(1, 0);
     if(sf::Keyboard::isKeyPressed(sf::Keyboard::D))
         pg->move(-1, 0);
@@ -19,5 +19,5 @@ void Controller::Commands() {
 Controller::Controller(sf::RenderWindow* w) {
     pg = new GameCharacter(0, 0);
     enemy = new GameCharacter(10, 15);
-    map = new MapView(pg, enemy, w);
+    map = new MapView(pg, enemy, w, mountains, mud);
 }

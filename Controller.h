@@ -9,6 +9,8 @@
 #include <iostream>
 #include "GameCharacter.h"
 #include "MapView.h"
+#include "Mud.h"
+#include "Mountain.h"
 
 class Controller {
 public:
@@ -21,6 +23,8 @@ private:
     GameCharacter* pg;
     GameCharacter* enemy;
     MapView* map;
+    Mud* mud;
+    Mountain* mountains;
 };
 
 

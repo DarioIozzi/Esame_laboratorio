@@ -4,7 +4,7 @@
 
 #include "GameCharacter.h"
 
-void GameCharacter::move(int x, int y) {
+void GameCharacter::move(int x, int y) {   //TODO aggiungere rallentamento da terreno
     if(abs(posX + x) < MAP_WIDTH && abs(posY +y) < MAP_HEIGHT) {
         posX += x;
         posY += y;

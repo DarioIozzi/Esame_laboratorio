@@ -8,7 +8,7 @@
 
 #include "Observer.h"
 #include "Subject.h"
-#include "Findpath.h"
+#include "Findpath.cpp"
 #include <memory>
 #include <list>
 

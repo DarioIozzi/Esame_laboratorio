@@ -11,7 +11,7 @@ public:
     Display() {}
     ~Display() {}
 
-    virtual void draw(int posx, int posy) = 0;
+    virtual void Draw(int posx, int posy) = 0;
 };
 
 
