@@ -49,6 +49,7 @@ given where due.
 #if defined(WIN32) && defined(_WINDOWS)
 #pragma warning( disable : 4786 )
 #endif
+using namespace std;
 
 template <class T> class AStarState;
 

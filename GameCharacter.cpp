@@ -1,11 +1,12 @@
 //
 // Created by dario on 12/08/21.
 //
-
 #include "GameCharacter.h"
 
-void GameCharacter::move(int x, int y) {   //TODO aggiungere rallentamento da terreno
-    if(abs(posX + x) < MAP_WIDTH && abs(posY +y) < MAP_HEIGHT) {
+void GameCharacter::move(int x, int y) {
+
+    if(abs(posX + x) <= WinWidth-80 && (posX + x) <= 0 && abs(posY +y) <= WinHeight-80 && (posY + y) <= 0  ) {
+
         posX += x;
         posY += y;
         notify();
@@ -26,5 +27,8 @@ void GameCharacter::notify() const {
     }
 }
 
-GameCharacter::GameCharacter(int x, int y) : posX(x), posY(y) {
+GameCharacter::GameCharacter(int x, int y, int WW, int WH) : posX(x), posY(y), WinWidth(WW), WinHeight(WH) {
+}
+
+GameCharacter::GameCharacter(int x, int y) : posX(x), posY(y){
 }

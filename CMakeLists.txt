@@ -3,12 +3,14 @@ project(Esame_laboratorio)
 
 set(CMAKE_CXX_STANDARD 14)
 
-add_executable(Esame_laboratorio main.cpp GameCharacter.cpp GameCharacter.h Observer.h Subject.h MapView.cpp MapView.h Controller.cpp Controller.h Display.h StlAStar.h Fsa.h Findpath.cpp
+add_executable(Esame_laboratorio main.cpp GameCharacter.cpp GameCharacter.h Observer.h Subject.h MapView.cpp MapView.h Controller.cpp Controller.h Display.h StlAStar.h Fsa.h
         TerrainType.h
         Mud.cpp
         Mud.h
         Mountain.cpp
         Mountain.h
+        WorldMap.h
+        WorldMap.cpp
 )
 
 set(SFML_STATIC_LIBRARIES TRUE)

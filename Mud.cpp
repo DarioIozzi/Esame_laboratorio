@@ -4,8 +4,8 @@
 
 #include "Mud.h"
 
-Mud::Mud(int x, int y) : posx(x), posy(y) {}
+Mud::Mud(int x, int y) : posX(x), posY(y) {}
 
-int Mud::getCosto() {
+int Mud::getCosto() const {
     return costo;
 }

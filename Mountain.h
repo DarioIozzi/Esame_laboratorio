@@ -12,12 +12,20 @@ public:
     Mountain(int x, int y);
     ~Mountain() override{}
 
-    int getCosto() override;
+    int getCosto() const override;
+
+    int getPosX() const override{
+        return posX;
+    }
+
+    int getPosY() const override{
+        return posY;
+    }
 
 private:
-    int costo;
-    int posx;
-    int posy;
+    const int costo = 9;
+    int posX;
+    int posY;
 };
 
 #endif //ESAME_LABORATORIO_MOUNTAIN_H

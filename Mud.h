@@ -12,12 +12,20 @@ public:
     Mud(int x, int y);
     ~Mud() override {}
 
-    int getCosto() override;
+    int getPosX() const override {
+        return posX;
+    }
+
+    int getPosY() const override {
+        return posY;
+    }
+
+    int getCosto() const override;
 
 private:
-    int costo;
-    int posx;
-    int posy;
+    const int costo = 5;
+    int posX;
+    int posY;
 };
 
 #endif //ESAME_LABORATORIO_MUD_H

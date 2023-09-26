@@ -22,11 +22,13 @@ public:
 private:
     GameCharacter* pg;
     GameCharacter* enemy;
-    TerrainType* Mountains;
-    TerrainType* Mud;
+    TerrainType* mountains;
+    TerrainType* mud;
     sf::CircleShape pgShape;
     sf::RectangleShape enemyShape;
     sf::RenderWindow* window;
+    sf::RectangleShape mudShape;
+    sf::RectangleShape mountainsShape;
 };
 
 

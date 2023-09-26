@@ -8,13 +8,16 @@
 
 #include "Observer.h"
 #include "Subject.h"
-#include "Findpath.cpp"
+#include "TerrainType.h"
+#include "cmath"
+//#include "Findpath.cpp"
 #include <memory>
 #include <list>
 
 class GameCharacter : public Subject{
 public:
     GameCharacter(int x, int y);
+    GameCharacter(int x, int y, int WW, int WH);
     ~GameCharacter() override {}
 
     int getPosX() const {
@@ -34,6 +37,9 @@ public:
 
 private:
     int posX, posY;
+    int WinWidth, WinHeight;
+    TerrainType* mud;
+    TerrainType* mountains;
     std::list<Observer*> observers;
 };
 

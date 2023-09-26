@@ -9,7 +9,10 @@ class TerrainType{
 public:
     TerrainType() {}
     virtual ~TerrainType() {}
-    virtual int getCosto() = 0;
+    virtual int getCosto() const = 0;
+
+    virtual int getPosX() const = 0;
+    virtual int getPosY() const = 0;
 };
 
 #endif //ESAME_LABORATORIO_TERRAINTYPE_H

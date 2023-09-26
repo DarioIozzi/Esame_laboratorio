@@ -11,10 +11,11 @@
 #include "MapView.h"
 #include "Mud.h"
 #include "Mountain.h"
+#include "WorldMap.h"
 
 class Controller {
 public:
-    explicit Controller(sf::RenderWindow* window);
+    explicit Controller(sf::RenderWindow* window, int WinWidth, int WinHeight);
     ~Controller() {    }
 
     void Commands();
@@ -22,7 +23,8 @@ public:
 private:
     GameCharacter* pg;
     GameCharacter* enemy;
-    MapView* map;
+    WorldMap* map;
+    MapView* DrawMap;
     Mud* mud;
     Mountain* mountains;
 };

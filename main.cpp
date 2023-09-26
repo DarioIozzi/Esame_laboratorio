@@ -1,11 +1,13 @@
 #include <SFML/Graphics.hpp>
 #include "Controller.h"
-#include "Findpath.h"
+//#include "Findpath.cpp"
 
+const int WinWidth = 800;
+const int WinHeight = 600;
 
 int main() {
-    sf::RenderWindow window(sf::VideoMode(800, 600), "My window");
-    Controller game(&window);
+    sf::RenderWindow window(sf::VideoMode(WinWidth, WinHeight), "My window");
+    Controller game(&window, WinWidth, WinHeight);
     while(window.isOpen()){
         sf::Event event{};
         while(window.pollEvent(event)){

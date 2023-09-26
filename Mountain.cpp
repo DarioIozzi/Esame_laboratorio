@@ -4,8 +4,8 @@
 
 #include "Mountain.h"
 
-Mountain::Mountain(int x, int y) : posx(x), posy(y) {}
+Mountain::Mountain(int x, int y) : posX(x), posY(y) {}
 
-int Mountain::getCosto() {
+int Mountain::getCosto() const {
     return costo;
 }

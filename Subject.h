@@ -5,7 +5,6 @@
 #ifndef ESAME_LABORATORIO_SUBJECT_H
 #define ESAME_LABORATORIO_SUBJECT_H
 
-
 #include <list>
 
 class Subject {
