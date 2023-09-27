@@ -13,6 +13,11 @@ public:
 
     virtual int getPosX() const = 0;
     virtual int getPosY() const = 0;
+    virtual int getWidth() const = 0;
+    virtual int getHeight() const = 0;
+private:
+    int width;
+    int Height;
 };
 
 #endif //ESAME_LABORATORIO_TERRAINTYPE_H

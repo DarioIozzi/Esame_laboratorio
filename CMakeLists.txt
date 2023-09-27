@@ -10,6 +10,7 @@ add_executable(Esame_laboratorio main.cpp GameCharacter.cpp GameCharacter.h Obse
         Mountain.cpp
         Mountain.h
         WorldMap.h
+        WorldMap.cpp
 )
 
 set(SFML_STATIC_LIBRARIES TRUE)

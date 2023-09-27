@@ -5,11 +5,11 @@
 
 void GameCharacter::move(int x, int y) {
 
-    if(abs(posX + x) <= WinWidth-80 && (posX + x) <= 0 && abs(posY +y) <= WinHeight-80 && (posY + y) <= 0  ) {
+    if(abs(posX + x) <= WorldMap::getMW()-80 && (posX + x) <= 0 && abs(posY +y) <= WorldMap::getMH()-80 && (posY + y) <= 0  ) {
         int c = map->getCosto(abs(posX), abs(posY));
         if(c == 9)
-            return;
-        posX += x/c;
+            return;      //TODO AGGIUNGERE DIMENSIONE PERSONAGGIO PER MOV OSTACOLATO
+        posX += x/c;     //TODO MODIFICARE PER OTTERENERE COSTO PROSSIMA CASELLA
         posY += y/c;
         notify();
     }

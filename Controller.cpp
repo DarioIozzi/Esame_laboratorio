@@ -20,7 +20,9 @@ Controller::Controller(sf::RenderWindow* w, int WinWidth, int WinHeight) {
     map = new WorldMap();
     map->CreateMap();
     mud = new Mud(-300, -150);
+    map->AddTP(mud);
     mountains = new Mountain(-300, -300);
+    map->AddTP(mountains);
     pg = new GameCharacter(0, 0, WinWidth, WinHeight, map);
     enemy = new GameCharacter(-100, -150);
     DrawMap = new MapView(pg, enemy, w, mountains, mud);

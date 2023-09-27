@@ -22,10 +22,20 @@ public:
         return posY;
     }
 
+    int getWidth() const override {
+        return width;
+    }
+
+    int getHeight() const override {
+        return Height;
+    }
+
 private:
     const int costo = 9;
     int posX;
     int posY;
+    int width = 100;
+    int Height = 100;
 };
 
 #endif //ESAME_LABORATORIO_MOUNTAIN_H

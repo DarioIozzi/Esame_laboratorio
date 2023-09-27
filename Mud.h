@@ -20,12 +20,22 @@ public:
         return posY;
     }
 
+    int getWidth() const override {
+        return width;
+    }
+
+    int getHeight() const override {
+        return Height;
+    }
+
     int getCosto() const override;
 
 private:
     const int costo = 5;
     int posX;
     int posY;
+    int width = 100;
+    int Height = 100;
 };
 
 #endif //ESAME_LABORATORIO_MUD_H
