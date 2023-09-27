@@ -17,10 +17,11 @@ void Controller::Commands() {
 }
 
 Controller::Controller(sf::RenderWindow* w, int WinWidth, int WinHeight) {
+    map = new WorldMap();
+    map->CreateMap();
     mud = new Mud(-300, -150);
     mountains = new Mountain(-300, -300);
-    pg = new GameCharacter(0, 0, WinWidth, WinHeight);
+    pg = new GameCharacter(0, 0, WinWidth, WinHeight, map);
     enemy = new GameCharacter(-100, -150);
-    map = new WorldMap(WinWidth, WinHeight);
     DrawMap = new MapView(pg, enemy, w, mountains, mud);
 }

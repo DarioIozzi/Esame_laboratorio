@@ -6,9 +6,11 @@
 void GameCharacter::move(int x, int y) {
 
     if(abs(posX + x) <= WinWidth-80 && (posX + x) <= 0 && abs(posY +y) <= WinHeight-80 && (posY + y) <= 0  ) {
-
-        posX += x;
-        posY += y;
+        int c = map->getCosto(abs(posX), abs(posY));
+        if(c == 9)
+            return;
+        posX += x/c;
+        posY += y/c;
         notify();
     }
 }
@@ -27,7 +29,7 @@ void GameCharacter::notify() const {
     }
 }
 
-GameCharacter::GameCharacter(int x, int y, int WW, int WH) : posX(x), posY(y), WinWidth(WW), WinHeight(WH) {
+GameCharacter::GameCharacter(int x, int y, int WW, int WH, WorldMap* map) : posX(x), posY(y), WinWidth(WW), WinHeight(WH), map(map) {
 }
 
 GameCharacter::GameCharacter(int x, int y) : posX(x), posY(y){

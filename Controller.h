@@ -11,7 +11,6 @@
 #include "MapView.h"
 #include "Mud.h"
 #include "Mountain.h"
-#include "WorldMap.h"
 
 class Controller {
 public:
@@ -23,10 +22,10 @@ public:
 private:
     GameCharacter* pg;
     GameCharacter* enemy;
-    WorldMap* map;
     MapView* DrawMap;
     Mud* mud;
     Mountain* mountains;
+    WorldMap* map;
 };
 
 

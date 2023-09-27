@@ -10,15 +10,15 @@
 #include "Subject.h"
 #include "TerrainType.h"
 #include "cmath"
-//#include "Findpath.cpp"
+#include "WorldMap.h"
 #include <memory>
 #include <list>
 
 class GameCharacter : public Subject{
 public:
     GameCharacter(int x, int y);
-    GameCharacter(int x, int y, int WW, int WH);
-    ~GameCharacter() override {}
+    GameCharacter(int x, int y, int WW, int WH, WorldMap* map);
+    ~GameCharacter() override = default;
 
     int getPosX() const {
         return posX;
@@ -41,6 +41,7 @@ private:
     TerrainType* mud;
     TerrainType* mountains;
     std::list<Observer*> observers;
+    WorldMap* map;
 };
 
 #endif //ESAME_LABORATORIO_GAMECHARACTER_H

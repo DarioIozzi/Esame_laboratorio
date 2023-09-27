@@ -9,14 +9,25 @@
 
 class WorldMap{
 public:
-    WorldMap(int WW, int WH);
 
-    int getCosto() const {
-        return costo;
+    WorldMap() {}
+    ~WorldMap() {}
+
+    void CreateMap(){
+        for(int i = 0; i<800; i++){
+            world_map[i*600] = 1;
+            for(int j = 1; j<600; j++){
+                world_map[i*600+j] = 1;
+            }
+        }
+    }
+
+    int getCosto(int x, int y) {
+        return world_map[(y*600)+x];
     }
 
 private:
-    int costo;
-    int WW, WH;
-    int world_map[ WW * WH ]; //TODO WORLD MAP. TUTTO IN MAIN?
+    static const int MW = 800;
+    static const int MH = 600;
+    int world_map[MW * MH];
 };
