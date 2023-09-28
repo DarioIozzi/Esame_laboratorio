@@ -6,13 +6,13 @@
 #include <SFML/Graphics.hpp>
 
 void Controller::Commands() {
-    if(sf::Keyboard::isKeyPressed(sf::Keyboard::A))
+    if(sf::Keyboard::isKeyPressed(sf::Keyboard::A))     //SINISTRA
         pg->move(10, 0);
-    if(sf::Keyboard::isKeyPressed(sf::Keyboard::D))
+    if(sf::Keyboard::isKeyPressed(sf::Keyboard::D))     //DESTRA
         pg->move(-10, 0);
-    if(sf::Keyboard::isKeyPressed(sf::Keyboard::W))
+    if(sf::Keyboard::isKeyPressed(sf::Keyboard::W))     //ALTO
         pg->move(0, 10);
-    if(sf::Keyboard::isKeyPressed(sf::Keyboard::S))
+    if(sf::Keyboard::isKeyPressed(sf::Keyboard::S))     //BASSO
         pg->move(0, -10);
 }
 

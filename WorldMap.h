@@ -17,9 +17,9 @@ public:
 
     void CreateMap(){
         for(int j = 0; j<800; j++){
-            world_map[j*600] = 1;
+            world_map[j*600] = 0;
             for(int i = 1; i<600; i++){
-                world_map[j*600+i] = 1;
+                world_map[j*600+i] = 0;
             }
         }
     }

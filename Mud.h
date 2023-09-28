@@ -31,7 +31,7 @@ public:
     int getCosto() const override;
 
 private:
-    const int costo = 5;
+    const int costo = 7;
     int posX;
     int posY;
     int width = 100;
