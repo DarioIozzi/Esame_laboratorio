@@ -4,7 +4,9 @@
 
 #include "Mountain.h"
 
-Mountain::Mountain(int x, int y) : posX(x), posY(y) {}
+Mountain::Mountain(sf::Vector2f o) {
+    pos = o;
+}
 
 int Mountain::getCosto() const {
     return costo;

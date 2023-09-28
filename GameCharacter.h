@@ -16,19 +16,16 @@
 
 class GameCharacter : public Subject{
 public:
-    GameCharacter(int x, int y);
-    GameCharacter(int x, int y, int WW, int WH, WorldMap* map);
+    GameCharacter(sf::Vector2f o);
+    GameCharacter(sf::Vector2f o, WorldMap* map);
     ~GameCharacter() override = default;
 
-    int getPosX() const {
-        return posX;
+    sf::Vector2f getPos() const override {
+        return pos;
     }
 
-    int getPosY() const {
-        return posY;
-    }
-
-    void move(int x, int y) override;
+    void moveX(float x) override;
+    void moveY(float y) override;
 
     void subscribe(Observer* o) override;
     void unsubscribe(Observer* o) override;
@@ -36,8 +33,6 @@ public:
     void notify() const override;
 
 private:
-    int posX, posY;
-    int WinWidth, WinHeight;
     TerrainType* mud;
     TerrainType* mountains;
     std::list<Observer*> observers;

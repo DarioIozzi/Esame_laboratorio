@@ -4,7 +4,9 @@
 
 #include "Mud.h"
 
-Mud::Mud(int x, int y) : posX(x), posY(y) {}
+Mud::Mud(sf::Vector2f o) {
+    pos = o;
+}
 
 int Mud::getCosto() const {
     return costo;

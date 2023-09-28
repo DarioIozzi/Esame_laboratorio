@@ -18,7 +18,7 @@ public:
 
     void update() override;
 
-    void Draw(int posx, int posy) override;
+    void Draw(sf::Vector2f p) override;
 private:
     GameCharacter* pg;
     GameCharacter* enemy;

@@ -14,7 +14,7 @@
 
 class Controller {
 public:
-    explicit Controller(sf::RenderWindow* window, int WinWidth, int WinHeight);
+    explicit Controller(sf::RenderWindow* window);
     ~Controller() {    }
 
     void Commands();

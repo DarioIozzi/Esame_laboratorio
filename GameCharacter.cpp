@@ -2,78 +2,78 @@
 // Created by dario on 12/08/21.
 //
 #include "GameCharacter.h"
-void GameCharacter::move(int x, int y) {
-    if(abs(posX + x) <= WorldMap::getMW()-80 && (posX + x) <= 0 && abs(posY +y) <= WorldMap::getMH()-80 && (posY + y) <= 0  ) {
-        int c = map->getCosto(abs(posX), abs(posY));
-            if(x == 0){       //VERTICALE
-                if(y < 0) {   //BASSO
-                    for (int i = 0; i < 10 - c; i++) {
-                        if (map->getCosto(abs(posX), abs(posY - i - 80)) == 9) {
-                            posY -= i;
-                            notify();
-                            return;
-                        }
-                    }
-                    if(map->getCosto(abs(posX), abs(posY- 80)) != 0){
-                        posY += y + map->getCosto(abs(posX), abs(posY - 80));
-                        notify();
-                        return;
-                    }
-                    posY += y + c;
-                    notify();                               //TODO FUNZIONE InRange?
-                }
-                else{    //ALTO
-                    for (int i = 0; i < 10 - c; i++) {
-                        if (map->getCosto(abs(posX), abs(posY + i + 1)) == 9) {
-                            posY += i;
-                            notify();
-                            return;
-                        }
-                    }
-                    if(map->getCosto(abs(posX), abs(posY - 80)) !=0){
-                        posY += y - map->getCosto(abs(posX), abs(posY - 80));
-                        notify();
-                        return;
-                    }
-                    posY += y - c;
-                    notify();
-                }
+void GameCharacter::moveX(float x) {
+    if(pos.x + x <= WorldMap::getMW()-80 && (pos.x + x) <= 0){
+        int c = map->getCosto(pos);
+        if(x < 0) {    //DESTRA
+            for (int j = 0; j < 10 - c; j++) {
+            if (map->getCosto({pos.x - j - 80, pos.y}) == 9) {
+                pos.x -= j;
+                notify();
+                return;
             }
-            else if(y == 0){   //ORIZZONTALE
-                if(x < 0) {    //DESTRA
-                    for (int j = 0; j < 10 - c; j++) {
-                        if (map->getCosto(abs(posX - j - 80), abs(posY)) == 9) {
-                            posX -= j;
-                            notify();
-                            return;
-                        }
-                    }
-                    if(map->getCosto(abs(posX - 80), abs(posY)) != 0){
-                        posX += x + map->getCosto(abs(posX- 80), abs(posY));
-                        notify();
-                        return;
-                    }
-                    posX += x + c;
-                    notify();
-                }
-                else{       //SINISTRA
-                    for (int j = 0; j < 10 - c; j++) {
-                        if (map->getCosto(abs(posX + j + 1), abs(posY)) == 9) {
-                            posX += j;
-                            notify();
-                            return;
-                        }
-                    }
-                    if(map->getCosto(abs(posX - 80), abs(posY)) != 0){
-                        posX += x - map->getCosto(abs(posX- 80), abs(posY));
-                        notify();
-                        return;
-                    }
-                    posX += x - c;
-                    notify();
-                }
+        }
+        if(map->getCosto({pos.x - 80, pos.y}) != 0){
+            pos.x += x + map->getCosto({pos.x- 80, pos.y});notify();
+            return;
+        }
+        pos.x += x + c;             //TODO AGGIUSTARE
+        notify();
+    }
+        else{       //SINISTRA
+        for (int j = 0; j < 10 - c; j++) {
+            if (map->getCosto({pos.x + j + 1, pos.y}) == 9) {
+                pos.x += j;
+                notify();
+                return;
             }
+        }
+        if(map->getCosto({pos.x - 80, pos.y}) != 0){
+            pos.x += x - map->getCosto({pos.x- 80, pos.y});
+            notify();
+            return;
+        }
+        pos.x += x - c;
+        notify();
+    }
+}
+}
 
+void GameCharacter::moveY(float y) {
+    if(pos.y +y <= WorldMap::getMH()-80 && (pos.y + y) <= 0){
+        int c = map->getCosto(pos);
+        if(pos.y < 0) {   //BASSO
+            for (int i = 0; i < 10 - c; i++) {
+                if (map->getCosto({pos.x, pos.y - i - 80})) {
+                    pos.y -= i;
+                    notify();
+                    return;
+                }
+            }
+            if(map->getCosto({pos.x, pos.y- 80}) != 0){
+                pos.y += y + map->getCosto({pos.x, pos.y - 80});
+                notify();
+                return;
+            }
+            pos.y += y + c;
+            notify();
+        }
+        else{    //ALTO
+            for (int i = 0; i < 10 - c; i++) {
+                if (map->getCosto({pos.x, pos.y + i + 1}) == 9) {
+                    pos.y += i;
+                    notify();
+                    return;
+                }
+            }
+            if(map->getCosto({pos.x, pos.y - 80}) !=0){
+                pos.y += y - map->getCosto({pos.x, pos.y - 80});
+                notify();
+                return;
+            }
+            pos.y += y - c;
+            notify();
+        }
     }
 }
 
@@ -91,8 +91,10 @@ void GameCharacter::notify() const {
     }
 }
 
-GameCharacter::GameCharacter(int x, int y, int WW, int WH, WorldMap* map) : posX(x), posY(y), WinWidth(WW), WinHeight(WH), map(map) {
+GameCharacter::GameCharacter(sf::Vector2f o, WorldMap* map) : map(map){
+    pos = o;
 }
 
-GameCharacter::GameCharacter(int x, int y) : posX(x), posY(y){
+GameCharacter::GameCharacter(sf::Vector2f o) {
+    pos = o;
 }

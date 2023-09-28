@@ -6,10 +6,9 @@
 
 void WorldMap::AddTP(TerrainType *tp) {
     TP.push_back(tp);
-    int x = abs(tp->getPosX());
-    int y = abs(tp->getPosY());
-    for(int i = y; i < y + tp->getHeight(); i++){
-        for(int j = x; j < x + tp->getWidth(); j++){
+    sf::Vector2f p = tp->getPos();
+    for(int i = p.y; i < p.y + tp->getHeight(); i++){
+        for(int j = p.y; j < p.y + tp->getWidth(); j++){
             world_map[(j*600)+i] = tp->getCosto();
         }
     }

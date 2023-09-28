@@ -9,16 +9,8 @@
 
 class Mud : public TerrainType {
 public:
-    Mud(int x, int y);
+    Mud(sf::Vector2f o);
     ~Mud() override {}
-
-    int getPosX() const override {
-        return posX;
-    }
-
-    int getPosY() const override {
-        return posY;
-    }
 
     int getWidth() const override {
         return width;
@@ -28,12 +20,14 @@ public:
         return Height;
     }
 
+    sf::Vector2f getPos() const override {
+        return pos;
+    }
+
     int getCosto() const override;
 
 private:
     const int costo = 7;
-    int posX;
-    int posY;
     int width = 100;
     int Height = 100;
 };

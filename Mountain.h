@@ -9,18 +9,10 @@
 
 class Mountain : public TerrainType {
 public:
-    Mountain(int x, int y);
+    Mountain(sf::Vector2f o);
     ~Mountain() override{}
 
     int getCosto() const override;
-
-    int getPosX() const override{
-        return posX;
-    }
-
-    int getPosY() const override{
-        return posY;
-    }
 
     int getWidth() const override {
         return width;
@@ -30,10 +22,12 @@ public:
         return Height;
     }
 
+    sf::Vector2f getPos() const override{
+        return pos;
+    }
+
 private:
     const int costo = 9;
-    int posX;
-    int posY;
     int width = 100;
     int Height = 100;
 };

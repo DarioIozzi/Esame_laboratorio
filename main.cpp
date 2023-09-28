@@ -7,7 +7,7 @@ const int WinHeight = 600;
 
 int main() {
     sf::RenderWindow window(sf::VideoMode(WinWidth, WinHeight), "My window");
-    Controller game(&window, WinWidth, WinHeight);
+    Controller game(&window);
     while(window.isOpen()){
         sf::Event event{};
         while(window.pollEvent(event)){

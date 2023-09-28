@@ -4,8 +4,8 @@
 
 #include "MapView.h"
 
-void MapView::Draw(int posx, int posy) {
-    pgShape.setOrigin(posx, posy);
+void MapView::Draw(sf::Vector2f p) {
+    pgShape.setOrigin(p.x, p.y);
     window->clear();
     window->draw(pgShape);
     window->draw(enemyShape);
@@ -15,24 +15,27 @@ void MapView::Draw(int posx, int posy) {
 }
 
 void MapView::update() {
-    int posx = pg->getPosX();
-    int posy = pg->getPosY();
-    Draw(posx, posy);
+    sf::Vector2f p = pg->getPos();
+    Draw(p);
 }
 
 MapView::MapView(GameCharacter *p, GameCharacter* e, sf::RenderWindow* w, TerrainType* Mountains, TerrainType* Mud) : pg(p), enemy(e), mud(Mud), mountains(Mountains){
     pg->subscribe(this);
-    pgShape.setRadius(40);
-    pgShape.setOrigin(pg->getPosX(), pg->getPosY());
+    pgShape.setRadius(40);                          //TODO SET ORIGIN CON CENTRO DI SIMMETRIA
+    pgShape.setOrigin(0.f,0.f);
+    pgShape.setPosition(pg->getPos());
     pgShape.setFillColor(sf::Color::Red);
     enemyShape.setSize(sf::Vector2f(80.f, 55.f));
-    enemyShape.setOrigin(enemy->getPosX(), enemy->getPosY());
+    enemyShape.setOrigin(0.f,0.f);
+    enemyShape.setPosition(enemy->getPos());
     enemyShape.setFillColor(sf::Color::White);
     mudShape.setSize(sf::Vector2f(100.f, 100.f));
-    mudShape.setOrigin(mud->getPosX(), mud->getPosY());
+    mudShape.setOrigin(0.f,0.f);
+    mudShape.setPosition(mud->getPos());
     mudShape.setFillColor(sf::Color::Cyan);
     mountainsShape.setSize(sf::Vector2f (100.f, 100.f));
-    mountainsShape.setOrigin(mountains->getPosX(), mountains->getPosY());
+    mountainsShape.setOrigin(0.f,0.f);
+    mountainsShape.setPosition(mountains->getPos());
     mountainsShape.setFillColor(sf::Color::White);
     window = w;
     window->clear();

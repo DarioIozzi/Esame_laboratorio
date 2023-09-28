@@ -6,24 +6,24 @@
 #include <SFML/Graphics.hpp>
 
 void Controller::Commands() {
-    if(sf::Keyboard::isKeyPressed(sf::Keyboard::A))     //SINISTRA
-        pg->move(10, 0);
-    if(sf::Keyboard::isKeyPressed(sf::Keyboard::D))     //DESTRA
-        pg->move(-10, 0);
-    if(sf::Keyboard::isKeyPressed(sf::Keyboard::W))     //ALTO
-        pg->move(0, 10);
-    if(sf::Keyboard::isKeyPressed(sf::Keyboard::S))     //BASSO
-        pg->move(0, -10);
+    if(sf::Keyboard::isKeyPressed(sf::Keyboard::A))    //SINISTRA
+        pg->moveX(10.0f);
+    if(sf::Keyboard::isKeyPressed(sf::Keyboard::D))    //DESTRA
+        pg->moveX(-10.0f);
+    if(sf::Keyboard::isKeyPressed(sf::Keyboard::W))    //SU
+        pg->moveY(10.0f);
+    if(sf::Keyboard::isKeyPressed(sf::Keyboard::S))    //GIU'
+        pg->moveY(-10.0f);
 }
 
-Controller::Controller(sf::RenderWindow* w, int WinWidth, int WinHeight) {
+Controller::Controller(sf::RenderWindow* w) {
     map = new WorldMap();
     map->CreateMap();
-    mud = new Mud(-300, -150);
+    mud = new Mud({300, 150});
     map->AddTP(mud);
-    mountains = new Mountain(-300, -300);
+    mountains = new Mountain({300, 300});
     map->AddTP(mountains);
-    pg = new GameCharacter(0, 0, WinWidth, WinHeight, map);
-    enemy = new GameCharacter(-100, -150);
+    pg = new GameCharacter({0, 0}, map);
+    enemy = new GameCharacter({100, 100});
     DrawMap = new MapView(pg, enemy, w, mountains, mud);
 }

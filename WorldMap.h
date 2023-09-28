@@ -34,7 +34,9 @@ public:
         return MH;
     }
 
-    int getCosto(int x, int y) {
+    int getCosto(sf::Vector2f p) {
+        int x = p.x;
+        int y = p.y;
         return world_map[(x*600)+y];
     }
 
