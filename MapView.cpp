@@ -22,19 +22,19 @@ void MapView::update() {
 MapView::MapView(GameCharacter *p, Enemy* e, sf::RenderWindow* w, TerrainType* Mountains, TerrainType* Mud) : pg(p), enemy(e), mud(Mud), mountains(Mountains){
     pg->subscribe(this);
     pgShape.setSize(pg->getSize());
-    pgShape.setOrigin(pg->getSize().x/2, pg->getSize().y/2);
+    pgShape.setOrigin(0.f, 0.f);
     pgShape.setPosition(pg->getPos());
     pgShape.setFillColor(sf::Color::Red);
     enemyShape.setSize(enemy->getSize());
-    enemyShape.setOrigin(enemy->getSize().x/2, enemy->getSize().y/2);
+    enemyShape.setOrigin(0.f, 0.f);
     enemyShape.setPosition(enemy->getPos());
     enemyShape.setFillColor(sf::Color::White);
     mudShape.setSize(mud->getSize());
-    mudShape.setOrigin(mud->getSize().x/2, mud->getSize().y/2);
+    mudShape.setOrigin(0.f, 0.f);
     mudShape.setPosition(mud->getPos());
     mudShape.setFillColor(sf::Color::Cyan);
     mountainsShape.setSize(mountains->getSize());
-    mountainsShape.setOrigin(mountains->getSize().x/2, mountains->getSize().y/2);
+    mountainsShape.setOrigin(0.f, 0.f);
     mountainsShape.setPosition(mountains->getPos());
     mountainsShape.setFillColor(sf::Color::White);
     window = w;

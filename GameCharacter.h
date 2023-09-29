@@ -32,6 +32,9 @@ public:
         return size;
     }
 
+    void CollisionX(float x);
+    void CollisionY(float y);
+
     void notify() const;
 
 private:

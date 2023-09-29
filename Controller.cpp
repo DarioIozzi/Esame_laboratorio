@@ -22,7 +22,7 @@ Controller::Controller(sf::RenderWindow* w) {
     map->AddTP(mud);
     mountains = new Mountain({300, 400});
     map->AddTP(mountains);
-    pg = new GameCharacter({10, 10}, map);
+    pg = new GameCharacter({0, 0}, map);
     enemy = new Enemy({600, 500});
     DrawMap = new MapView(pg, enemy, w, mountains, mud);
 }
