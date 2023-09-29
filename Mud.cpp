@@ -4,7 +4,7 @@
 
 #include "Mud.h"
 
-Mud::Mud(sf::Vector2f o) {
+Mud::Mud(sf::Vector2f o) : TerrainType(o) {
     pos = o;
 }
 

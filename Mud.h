@@ -12,12 +12,8 @@ public:
     Mud(sf::Vector2f o);
     ~Mud() override {}
 
-    int getWidth() const override {
-        return width;
-    }
-
-    int getHeight() const override {
-        return Height;
+    sf::Vector2f getSize() const override {
+        return size;
     }
 
     sf::Vector2f getPos() const override {
@@ -28,8 +24,7 @@ public:
 
 private:
     const int costo = 7;
-    int width = 100;
-    int Height = 100;
+    sf::Vector2f size {100.f, 100.f};
 };
 
 #endif //ESAME_LABORATORIO_MUD_H

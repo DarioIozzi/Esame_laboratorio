@@ -7,13 +7,14 @@
 
 #include <SFML/Graphics.hpp>
 #include "Observer.h"
+#include "Enemy.h"
 #include "GameCharacter.h"
 #include "Display.h"
 #include "TerrainType.h"
 
 class MapView : public Observer, public Display{
 public:
-    explicit MapView(GameCharacter* p, GameCharacter* e, sf::RenderWindow* w, TerrainType* Mountains, TerrainType* Mud);
+    explicit MapView(GameCharacter* p, Enemy* e, sf::RenderWindow* w, TerrainType* Mountains, TerrainType* Mud);
     ~MapView() override;
 
     void update() override;
@@ -21,10 +22,10 @@ public:
     void Draw(sf::Vector2f p) override;
 private:
     GameCharacter* pg;
-    GameCharacter* enemy;
+    Enemy* enemy;
     TerrainType* mountains;
     TerrainType* mud;
-    sf::CircleShape pgShape;
+    sf::RectangleShape pgShape;
     sf::RectangleShape enemyShape;
     sf::RenderWindow* window;
     sf::RectangleShape mudShape;

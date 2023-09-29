@@ -9,20 +9,14 @@
 
 class TerrainType{
 public:
-    TerrainType() {}
+    TerrainType(sf::Vector2f o) {}
     virtual ~TerrainType() {}
     virtual int getCosto() const = 0;
-    virtual int getWidth() const = 0;
-    virtual int getHeight() const = 0;
+    virtual sf::Vector2f getSize() const = 0;
     virtual sf::Vector2f getPos() const = 0;
 
 protected:
     sf::Vector2f pos;
-
-private:
-    int width;
-    int Height;
-
 };
 
 #endif //ESAME_LABORATORIO_TERRAINTYPE_H

@@ -7,7 +7,6 @@
 
 
 #include <iostream>
-#include "GameCharacter.h"
 #include "MapView.h"
 #include "Mud.h"
 #include "Mountain.h"
@@ -15,13 +14,13 @@
 class Controller {
 public:
     explicit Controller(sf::RenderWindow* window);
-    ~Controller() {    }
+    ~Controller() {}
 
     void Commands();
 
 private:
     GameCharacter* pg;
-    GameCharacter* enemy;
+    Enemy* enemy;
     MapView* DrawMap;
     Mud* mud;
     Mountain* mountains;

@@ -4,7 +4,7 @@
 
 #include "Mountain.h"
 
-Mountain::Mountain(sf::Vector2f o) {
+Mountain::Mountain(sf::Vector2f o) : TerrainType(o){
     pos = o;
 }
 

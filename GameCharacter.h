@@ -7,36 +7,38 @@
 
 
 #include "Observer.h"
-#include "Subject.h"
-#include "TerrainType.h"
+#include "SFML/Graphics.hpp"
+#include <list>
 #include "cmath"
 #include "WorldMap.h"
 #include <memory>
-#include <list>
 
-class GameCharacter : public Subject{
+class GameCharacter{
 public:
-    GameCharacter(sf::Vector2f o);
     GameCharacter(sf::Vector2f o, WorldMap* map);
-    ~GameCharacter() override = default;
+    ~GameCharacter()  = default;
 
-    sf::Vector2f getPos() const override {
+    sf::Vector2f getPos() const  {
         return pos;
     }
 
-    void moveX(float x) override;
-    void moveY(float y) override;
+    void moveX(float x);
+    void moveY(float y);
 
-    void subscribe(Observer* o) override;
-    void unsubscribe(Observer* o) override;
+    void subscribe(Observer* o);
+    void unsubscribe(Observer* o);
 
-    void notify() const override;
+    sf::Vector2f getSize() const{
+        return size;
+    }
+
+    void notify() const;
 
 private:
-    TerrainType* mud;
-    TerrainType* mountains;
     std::list<Observer*> observers;
     WorldMap* map;
+    sf::Vector2f size {20.f,20.f};
+    sf::Vector2f pos;
 };
 
 #endif //ESAME_LABORATORIO_GAMECHARACTER_H
