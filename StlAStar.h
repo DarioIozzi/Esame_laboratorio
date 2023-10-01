@@ -27,9 +27,10 @@ given where due.
 #define STLASTAR_H
 // used for text debugging
 #include <iostream>
-#include <stdio.h>
+#include <cstdio>
 //#include <conio.h>
-#include <assert.h>
+#include <cassert>
+#include "NodeState.h"
 
 // stl includes
 #include <algorithm>
@@ -53,8 +54,8 @@ using namespace std;
 
 template <class T> class AStarState;
 
-// The AStar search class. UserState is the users state space type
-template <class UserState> class AStarSearch
+// The AStar search class. NodeState is the users state space type
+template <class NodeState> class AStarSearch
 {
 
 public: // data
@@ -100,7 +101,7 @@ public:
             return this->m_UserState.IsSameState(otherNode->m_UserState);
         }
 
-        UserState m_UserState;
+        NodeState m_UserState;
     };
 
     // For sorting the heap the STL needs compare function that lets us compare
@@ -132,7 +133,7 @@ public: // methods
     {
     }
 
-    AStarSearch( int MaxNodes ) :
+    explicit AStarSearch( int MaxNodes ) :
             m_State( SEARCH_STATE_NOT_INITIALISED ),
             m_CurrentSolutionNode( NULL ),
 #if USE_FSA_MEMORY
@@ -150,7 +151,7 @@ public: // methods
     }
 
     // Set Start and goal states
-    void SetStartAndGoalStates( UserState &Start, UserState &Goal )
+    void SetStartAndGoalStates(NodeState &Start, NodeState &Goal )
     {
         m_CancelRequest = false;
 
@@ -192,8 +193,7 @@ public: // methods
 
         // Next I want it to be safe to do a searchstep once the search has succeeded...
         if( (m_State == SEARCH_STATE_SUCCEEDED) ||
-            (m_State == SEARCH_STATE_FAILED)
-                )
+            (m_State == SEARCH_STATE_FAILED) )
         {
             return m_State;
         }
@@ -291,7 +291,7 @@ public: // methods
             for( typename vector< Node * >::iterator successor = m_Successors.begin(); successor != m_Successors.end(); successor ++ )
             {
                 // 	The g value for this successor ...
-                float newg = n->g + n->m_UserState.GetCost( (*successor)->m_UserState );
+                float newg = n->g + n->m_UserState.GetCost((*successor)->m_UserState);
 
                 // Now we need to find whether the node is on the open or closed lists
                 // If it is but the node that is already on them is better (lower g)
@@ -431,7 +431,7 @@ public: // methods
 
     // User calls this to add a successor to a list of successors
     // when expanding the search frontier
-    bool AddSuccessor( UserState &State )
+    bool AddSuccessor(NodeState &State )
     {
         Node *node = AllocateNode();
 
@@ -482,7 +482,7 @@ public: // methods
     // Functions for traversing the solution
 
     // Get start node
-    UserState *GetSolutionStart()
+    NodeState *GetSolutionStart()
     {
         m_CurrentSolutionNode = m_Start;
         if( m_Start )
@@ -496,7 +496,7 @@ public: // methods
     }
 
     // Get next node
-    UserState *GetSolutionNext()
+    NodeState *GetSolutionNext()
     {
         if( m_CurrentSolutionNode )
         {
@@ -515,7 +515,7 @@ public: // methods
     }
 
     // Get end node
-    UserState *GetSolutionEnd()
+    NodeState *GetSolutionEnd()
     {
         m_CurrentSolutionNode = m_Goal;
         if( m_Goal )
@@ -529,7 +529,7 @@ public: // methods
     }
 
     // Step solution iterator backwards
-    UserState *GetSolutionPrev()
+    NodeState *GetSolutionPrev()
     {
         if( m_CurrentSolutionNode )
         {
@@ -564,13 +564,13 @@ public: // methods
     // For educational use and debugging it is useful to be able to view
     // the open and closed list at each step, here are two functions to allow that.
 
-    UserState *GetOpenListStart()
+    NodeState *GetOpenListStart()
     {
         float f,g,h;
         return GetOpenListStart( f,g,h );
     }
 
-    UserState *GetOpenListStart( float &f, float &g, float &h )
+    NodeState *GetOpenListStart(float &f, float &g, float &h )
     {
         iterDbgOpen = m_OpenList.begin();
         if( iterDbgOpen != m_OpenList.end() )
@@ -584,13 +584,13 @@ public: // methods
         return NULL;
     }
 
-    UserState *GetOpenListNext()
+    NodeState *GetOpenListNext()
     {
         float f,g,h;
         return GetOpenListNext( f,g,h );
     }
 
-    UserState *GetOpenListNext( float &f, float &g, float &h )
+    NodeState *GetOpenListNext(float &f, float &g, float &h )
     {
         iterDbgOpen++;
         if( iterDbgOpen != m_OpenList.end() )
@@ -604,13 +604,13 @@ public: // methods
         return NULL;
     }
 
-    UserState *GetClosedListStart()
+    NodeState *GetClosedListStart()
     {
         float f,g,h;
         return GetClosedListStart( f,g,h );
     }
 
-    UserState *GetClosedListStart( float &f, float &g, float &h )
+    NodeState *GetClosedListStart(float &f, float &g, float &h )
     {
         iterDbgClosed = m_ClosedList.begin();
         if( iterDbgClosed != m_ClosedList.end() )
@@ -625,13 +625,13 @@ public: // methods
         return NULL;
     }
 
-    UserState *GetClosedListNext()
+    NodeState *GetClosedListNext()
     {
         float f,g,h;
         return GetClosedListNext( f,g,h );
     }
 
-    UserState *GetClosedListNext( float &f, float &g, float &h )
+    NodeState *GetClosedListNext(float &f, float &g, float &h )
     {
         iterDbgClosed++;
         if( iterDbgClosed != m_ClosedList.end() )

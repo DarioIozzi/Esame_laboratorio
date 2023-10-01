@@ -11,6 +11,8 @@
 #include <list>
 #include "cmath"
 #include "WorldMap.h"
+#include "StlAStar.h"
+#include "NodeState.h"
 #include <memory>
 
 class GameCharacter{
@@ -32,8 +34,12 @@ public:
         return size;
     }
 
-    void CollisionX(float x);
-    void CollisionY(float y);
+
+
+    void findpath(sf::Vector2f destination);
+
+    void CollisionX();
+    void CollisionY();
 
     void notify() const;
 
