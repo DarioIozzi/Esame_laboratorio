@@ -13,6 +13,8 @@ void Controller::Commands() {
         pg->moveY(-10.0f);
     if(sf::Keyboard::isKeyPressed(sf::Keyboard::S))    //GIU'
         pg->moveY(10.0f);
+    if(sf::Mouse::isButtonPressed(sf::Mouse::Right))
+        pg->findpath();
 }
 
 Controller::Controller(sf::RenderWindow* w) {
