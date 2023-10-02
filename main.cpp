@@ -1,6 +1,5 @@
 #include <SFML/Graphics.hpp>
 #include "Controller.h"
-//#include "Findpath.cpp"
 
 const int WinWidth = 800;
 const int WinHeight = 600;

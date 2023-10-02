@@ -25,6 +25,7 @@ private:
     Mud* mud;
     Mountain* mountains;
     WorldMap* map;
+    sf::RenderWindow* window;
 };
 
 

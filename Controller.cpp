@@ -14,10 +14,10 @@ void Controller::Commands() {
     if(sf::Keyboard::isKeyPressed(sf::Keyboard::S))    //GIU'
         pg->moveY(10.0f);
     if(sf::Mouse::isButtonPressed(sf::Mouse::Right))
-        pg->findpath();
+        pg->findpath(enemy->getPos());
 }
 
-Controller::Controller(sf::RenderWindow* w) {
+Controller::Controller(sf::RenderWindow* w) : window(w) {
     map = new WorldMap();
     map->CreateMap();
     mud = new Mud({300, 150});
@@ -26,5 +26,5 @@ Controller::Controller(sf::RenderWindow* w) {
     map->AddTP(mountains);
     pg = new GameCharacter({0, 0}, map);
     enemy = new Enemy({600, 500});
-    DrawMap = new MapView(pg, enemy, w, mountains, mud);
+    DrawMap = new MapView(pg, enemy, w, mountains, mud);    //TODO RENDERE STATICA?
 }

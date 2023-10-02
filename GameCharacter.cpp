@@ -153,7 +153,7 @@ void GameCharacter::CollisionY() {
 void GameCharacter::findpath(sf::Vector2f destination) {
     AStarSearch<NodeState> astarsearch;
     NodeState NStart(pos);
-    NodeState NEnd(destination);
+    NodeState NEnd(static_cast<sf::Vector2f>(destination));
     astarsearch.SetStartAndGoalStates( NStart, NEnd );
 
     unsigned int SearchCount = 0;

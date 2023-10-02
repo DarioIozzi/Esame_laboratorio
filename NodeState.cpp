@@ -2,7 +2,7 @@
 // Created by Dario on 02/10/2023.
 //
 
-#include "NodeState.h"
+#include "StlAStar.h"
 
 float NodeState::GoalDistanceEstimate(NodeState &nodeGoal) {
     return abs(pos.x - nodeGoal.pos.x) + abs(pos.y - nodeGoal.pos.y);
@@ -60,4 +60,10 @@ bool NodeState::IsSameState( NodeState &thisState ){
         return true;
     }
     return false;
+}
+
+std::size_t NodeState::Hash() {
+    size_t h1 = hash<float>{}(pos.x);
+    size_t h2 = hash<float>{}(pos.y);
+    return h1 ^ (h2 << 1);
 }
