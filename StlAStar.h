@@ -27,6 +27,7 @@ given where due.
 #define STLASTAR_H
 // used for text debugging
 #include <iostream>
+using namespace std;
 #include <cstdio>
 //#include <conio.h>
 #include <cassert>
@@ -36,9 +37,11 @@ given where due.
 #include <unordered_set>
 #include <vector>
 #include <cfloat>
+#include <SFML/Graphics.hpp>
+#include "WorldMap.h"
 
 // fast fixed size memory allocator, used for fast node memory management
-#include "fsa.h"
+#include "Fsa.h"
 
 // Fixed size memory allocator can be disabled to compare performance
 // Uses std new and delete instead if you turn it off
@@ -49,7 +52,7 @@ given where due.
 #if defined(WIN32) && defined(_WINDOWS)
 #pragma warning( disable : 4786 )
 #endif
-using namespace std;
+//using namespace std;
 
 class NodeState;
 
@@ -828,16 +831,19 @@ public:
     explicit NodeState(sf::Vector2f p) : pos(p) {}
     ~NodeState() {}
 
-    float GoalDistanceEstimate( NodeState &nodeGoal );
-    bool IsGoal( NodeState &nodeGoal );
+    sf::Vector2f getPos(){
+        return pos;
+    }
+    float GoalDistanceEstimate( NodeState &nodeGoal ) const;
+    bool IsGoal( NodeState &nodeGoal ) const;
     bool GetSuccessors( AStarSearch <NodeState> *astarsearch, NodeState *parentNode );
-    float GetCost(NodeState state);
-    bool IsSameState( NodeState &AS );
-    std::size_t Hash();
+    float GetCost(NodeState &successor) const;
+    bool IsSameState( NodeState &goalState ) const;
+    std::size_t Hash() const;
 
 private:
     sf::Vector2f pos;
-    WorldMap* map;
+    //WorldMap* map;
 };
 
 #endif

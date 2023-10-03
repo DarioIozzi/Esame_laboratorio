@@ -4,11 +4,11 @@
 
 #include "StlAStar.h"
 
-float NodeState::GoalDistanceEstimate(NodeState &nodeGoal) {
+float NodeState::GoalDistanceEstimate(NodeState &nodeGoal) const {
     return abs(pos.x - nodeGoal.pos.x) + abs(pos.y - nodeGoal.pos.y);
 }
 
-bool NodeState::IsGoal( NodeState &nodeGoal ){
+bool NodeState::IsGoal( NodeState &nodeGoal ) const {
     if( (pos.x == nodeGoal.pos.x) && (pos.y == nodeGoal.pos.y) )
     {
         return true;
@@ -28,22 +28,22 @@ bool NodeState::GetSuccessors( AStarSearch<NodeState> *astarsearch, NodeState *p
 
     NodeState NewNode;
 
-    if( (map->getCosto( {pos.x - 1, pos.y} ) < 9) && !((parentX == pos.x - 1) && (parentY == pos.y))){
+    if( (WorldMap::getCosto( {pos.x - 1, pos.y} ) < 9) && !((parentX == pos.x - 1) && (parentY == pos.y))){
         NewNode = NodeState( {pos.x - 1, pos.y} );
         astarsearch->AddSuccessor( NewNode );
     }
 
-    if( (map->getCosto( {pos.x, pos.y - 1} ) < 9) && !((parentX == pos.x) && (parentY == pos.y - 1))){
+    if( (WorldMap::getCosto( {pos.x, pos.y - 1} ) < 9) && !((parentX == pos.x) && (parentY == pos.y - 1))){
         NewNode = NodeState( {pos.x, pos.y - 1} );
         astarsearch->AddSuccessor( NewNode );
     }
 
-    if( (map->getCosto({ pos.x + 1, pos.y }) < 9) && !((parentX == pos.x + 1) && (parentY == pos.y))){
+    if( (WorldMap::getCosto({ pos.x + 1, pos.y }) < 9) && !((parentX == pos.x + 1) && (parentY == pos.y))){
         NewNode = NodeState( {pos.x + 1, pos.y} );
         astarsearch->AddSuccessor( NewNode );
     }
 
-    if( (map->getCosto({ pos.x, pos.y + 1 }) < 9) && !((parentX == pos.x) && (parentY == pos.y + 1))){
+    if( (WorldMap::getCosto({ pos.x, pos.y + 1 }) < 9) && !((parentX == pos.x) && (parentY == pos.y + 1))){
         NewNode = NodeState( {pos.x, pos.y + 1} );
         astarsearch->AddSuccessor( NewNode );
     }
@@ -51,18 +51,18 @@ bool NodeState::GetSuccessors( AStarSearch<NodeState> *astarsearch, NodeState *p
     return true;
 }
 
-float NodeState::GetCost(NodeState state) {
-    return (float) map->getCosto({ pos.x, pos.y });
+float NodeState::GetCost(NodeState &successor) const {
+    return static_cast<float>(WorldMap::getCosto({ pos.x, pos.y }));
 }
 
-bool NodeState::IsSameState( NodeState &thisState ){
-    if( (pos.x == thisState.pos.x) && (pos.y == thisState.pos.y) ){
+bool NodeState::IsSameState( NodeState &goalState ) const {
+    if( (pos.x == goalState.pos.x) && (pos.y == goalState.pos.y) ){
         return true;
     }
     return false;
 }
 
-std::size_t NodeState::Hash() {
+std::size_t NodeState::Hash() const{
     size_t h1 = hash<float>{}(pos.x);
     size_t h2 = hash<float>{}(pos.y);
     return h1 ^ (h2 << 1);

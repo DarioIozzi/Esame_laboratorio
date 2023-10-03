@@ -4,10 +4,10 @@
 #include "GameCharacter.h"
 void GameCharacter::moveX(float x) {
     if(pos.x + x <= WorldMap::getMW() - size.x && (pos.x + x) >= 0){
-        int p1 = map->getCosto(pos);
-        int p2 = map->getCosto({pos.x + size.x, pos.y});
-        int p3 = map->getCosto({pos.x, pos.y + size.y});
-        int p4 = map->getCosto({pos.x + size.x, pos.y + size.y});
+        int p1 = WorldMap::getCosto(pos);
+        int p2 = WorldMap::getCosto({pos.x + size.x, pos.y});
+        int p3 = WorldMap::getCosto({pos.x, pos.y + size.y});
+        int p4 = WorldMap::getCosto({pos.x + size.x, pos.y + size.y});
 
         if (p1 != 0) {
             int c = x < 0 ? p1 : -p1;
@@ -28,16 +28,19 @@ void GameCharacter::moveX(float x) {
         else
             pos.x += x;
         CollisionX();
+
+        if(FP)
+            PathAdjustX();
         notify();
     }
 }
 
 void GameCharacter::moveY(float y) {
     if (pos.y + y <= WorldMap::getMH() - size.y && (pos.y + y) >= 0) {
-        int p1 = map->getCosto(pos);
-        int p2 = map->getCosto({pos.x + size.x, pos.y});
-        int p3 = map->getCosto({pos.x, pos.y + size.y});
-        int p4 = map->getCosto({pos.x + size.x, pos.y + size.y});
+        int p1 = WorldMap::getCosto(pos);
+        int p2 = WorldMap::getCosto({pos.x + size.x, pos.y});
+        int p3 = WorldMap::getCosto({pos.x, pos.y + size.y});
+        int p4 = WorldMap::getCosto({pos.x + size.x, pos.y + size.y});
         if (p1 != 0) {
             int c = y < 0 ? p1 : -p1;
             pos.y += y + c;
@@ -57,6 +60,9 @@ void GameCharacter::moveY(float y) {
         else
             pos.y += y;
         CollisionY();
+
+        if(FP)
+            PathAdjustY();
         notify();
     }
 }
@@ -75,88 +81,95 @@ void GameCharacter::notify() const {
     }
 }
 
-GameCharacter::GameCharacter(sf::Vector2f o, WorldMap* map) : map(map){
+GameCharacter::GameCharacter(sf::Vector2f o) {
     pos = o;
 }
 
 void GameCharacter::CollisionX() {
-    if (map->getCosto(pos) == 9) {
+    if (WorldMap::getCosto(pos) == 9) {
         for (int j = 1; j < 11; j++) {
-            if (map->getCosto({pos.x + j, pos.y}) != 9) {
+            if (WorldMap::getCosto({pos.x + j, pos.y}) != 9) {
                 pos.x += j;
-                return;
+                break;
             }
         }
+        return;
     }
-    if (map->getCosto({pos.x, pos.y + size.y}) == 9) {
+    if (WorldMap::getCosto({pos.x, pos.y + size.y}) == 9) {
         for (int j = 1; j < 11; j++) {
-            if (map->getCosto({pos.x + j, pos.y + size.y}) != 9) {
+            if (WorldMap::getCosto({pos.x + j, pos.y + size.y}) != 9) {
                 pos.x += j;
-                return;
+                break;
             }
         }
+        return;
     }
-
-    if (map->getCosto({pos.x + size.x, pos.y}) == 9) {
+    if (WorldMap::getCosto({pos.x + size.x, pos.y}) == 9) {
         for (int j = 1; j < 11; j++) {
-            if (map->getCosto({pos.x + size.x - j, pos.y}) != 9) {
+            if (WorldMap::getCosto({pos.x + size.x - j, pos.y}) != 9) {
                 pos.x -= j;
-                return;
+                break;
             }
         }
+        return;
     }
-    if (map->getCosto({pos.x + size.x, pos.y + size.y}) == 9) {
+    if (WorldMap::getCosto({pos.x + size.x, pos.y + size.y}) == 9) {
         for (int j = 1; j < 11; j++) {
-            if (map->getCosto({pos.x + size.x - j, pos.y + size.y}) != 9) {
+            if (WorldMap::getCosto({pos.x + size.x - j, pos.y + size.y}) != 9) {
                 pos.x -= j;
-                return;
+                break;
             }
         }
+        return;
     }
 }
 
 void GameCharacter::CollisionY() {
-    if (map->getCosto(pos) == 9) {
+    if (WorldMap::getCosto(pos) == 9) {
         for (int i = 1; i < 11; i++) {
-            if (map->getCosto({pos.x, pos.y + i}) != 9) {
+            if (WorldMap::getCosto({pos.x, pos.y + i}) != 9) {
                 pos.y += i;
-                return;
+                break;
             }
         }
+        return;
     }
-    if (map->getCosto({pos.x + size.x, pos.y}) == 9) {
+    if (WorldMap::getCosto({pos.x + size.x, pos.y}) == 9) {
         for (int i = 1; i < 11; i++) {
-            if (map->getCosto({pos.x + size.x, pos.y + i}) != 9) {
+            if (WorldMap::getCosto({pos.x + size.x, pos.y + i}) != 9){
                 pos.y += i;
-                return;
+                break;
             }
         }
+        return;
     }
-    if (map->getCosto({pos.x, pos.y + size.y}) == 9) {
+    if (WorldMap::getCosto({pos.x, pos.y + size.y}) == 9) {
         for (int i = 1; i < 11; i++) {
-            if (map->getCosto({pos.x, pos.y + size.y - i}) != 9) {
+            if (WorldMap::getCosto({pos.x, pos.y + size.y - i}) != 9) {
                 pos.y -= i;
-                return;
+                break;
             }
         }
+        return;
     }
-    if (map->getCosto({pos.x + size.x, pos.y + size.y}) == 9) {
+    if (WorldMap::getCosto({pos.x + size.x, pos.y + size.y}) == 9) {
         for (int i = 1; i < 11; i++) {
-            if (map->getCosto({pos.x + size.x, pos.y + size.y - i}) != 9) {
+            if (WorldMap::getCosto({pos.x + size.x, pos.y + size.y - i}) != 9) {
                 pos.y -= i;
-                return;
+                break;
             }
         }
+        return;
     }
 }
 
 void GameCharacter::findpath(sf::Vector2f destination) {
     AStarSearch<NodeState> astarsearch;
     NodeState NStart(pos);
-    NodeState NEnd(static_cast<sf::Vector2f>(destination));
+    NodeState NEnd(destination);
     astarsearch.SetStartAndGoalStates( NStart, NEnd );
 
-    unsigned int SearchCount = 0;
+  //unsigned int SearchCount = 0;
     unsigned int SearchState;
 
     do{
@@ -203,13 +216,74 @@ void GameCharacter::findpath(sf::Vector2f destination) {
 
     if( SearchState == AStarSearch<NodeState>::SEARCH_STATE_SUCCEEDED ){
 
-        //TODO DISEGNA IL PERCORSO
+        int vertices = 10;
+        path.setPrimitiveType(sf::LineStrip);
+        path.resize(vertices);
+        int numLine = 0;
 
+        NodeState *node = astarsearch.GetSolutionStart();
+
+        for( ;; )
+        {
+            node = astarsearch.GetSolutionNext();
+
+            if( !node )
+            {
+                break;
+            }
+
+            if(numLine < vertices) {
+                path[numLine] = sf::Vector2f(node->getPos());
+                numLine++;
+            }
+            else
+                path.append(sf::Vertex(node->getPos()));
+        }
+
+        cout << "trovato" << endl;
         astarsearch.FreeSolutionNodes();
+        FP = !FP;
+        notify();
     }
     else if( SearchState == AStarSearch<NodeState>::SEARCH_STATE_FAILED ){
         cout << "Impossibile raggiungere la destinazione" <<endl;
 
     }
     astarsearch.EnsureMemoryFreed();
+}
+
+void GameCharacter::PathAdjustX() {
+    if (path[1].position == pos) {
+        for (int i = 0; i < path.getVertexCount() - 1; i++)
+            path[i] = path[i + 1];
+        path.resize(path.getVertexCount() - 1);
+    } else if (path[0].position.y == path[1].position.y) {
+        path[0].position.x = pos.x;
+    } else {
+        if (path[0].position == pos)
+            return;
+        path.append(sf::Vertex());
+        for (int i = path.getVertexCount() - 1; i > 0; i++) {
+            path[i] = path[i - 1];
+        }
+        path[0].position = pos;
+    }
+}
+
+void GameCharacter::PathAdjustY() {
+    if (path[1].position == pos) {
+        for (int i = 0; i < path.getVertexCount() - 1; i++)
+            path[i] = path[i + 1];
+        path.resize(path.getVertexCount() - 1);
+    } else if (path[0].position.x == path[1].position.x) {
+        path[0].position.y = pos.y;
+    } else {
+        if (path[0].position == pos)
+            return;
+        path.append(sf::Vertex());
+        for (int i = path.getVertexCount() - 1; i > 0; i++) {
+            path[i] = path[i - 1];
+        }
+        path[0].position = pos;
+    }
 }

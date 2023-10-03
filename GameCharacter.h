@@ -10,14 +10,12 @@
 #include "SFML/Graphics.hpp"
 #include <list>
 #include "cmath"
-#include "WorldMap.h"
 #include "StlAStar.h"
-#include "NodeState.h"
 #include <memory>
 
 class GameCharacter{
 public:
-    GameCharacter(sf::Vector2f o, WorldMap* map);
+    GameCharacter(sf::Vector2f o);
     ~GameCharacter()  = default;
 
     sf::Vector2f getPos() const  {
@@ -34,8 +32,6 @@ public:
         return size;
     }
 
-
-
     void findpath(sf::Vector2f destination);
 
     void CollisionX();
@@ -43,11 +39,17 @@ public:
 
     void notify() const;
 
+    void PathAdjustX();
+    void PathAdjustY();
+
+    bool FP = false;
+
 private:
     std::list<Observer*> observers;
-    WorldMap* map;
+    //WorldMap* map;
     sf::Vector2f size {20.f,20.f};
     sf::Vector2f pos;
+    sf::VertexArray path;
 };
 
 #endif //ESAME_LABORATORIO_GAMECHARACTER_H

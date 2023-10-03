@@ -6,6 +6,7 @@
 #define ESAME_LABORATORIO_MAPVIEW_H
 
 #include <SFML/Graphics.hpp>
+#include <SFML/Graphics/VertexArray.hpp>
 #include "Observer.h"
 #include "Enemy.h"
 #include "GameCharacter.h"
@@ -14,7 +15,7 @@
 
 class MapView : public Observer, public Display{
 public:
-    explicit MapView(GameCharacter* p, Enemy* e, sf::RenderWindow* w, TerrainType* Mountains, TerrainType* Mud);
+    MapView(GameCharacter* p, Enemy* e, sf::RenderWindow* w, TerrainType* Mountains, TerrainType* Mud);
     ~MapView() override;
 
     void update() override;
@@ -30,6 +31,7 @@ private:
     sf::RenderWindow* window;
     sf::RectangleShape mudShape;
     sf::RectangleShape mountainsShape;
+    sf::VertexArray *path;
 };
 
 

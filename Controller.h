@@ -24,7 +24,7 @@ private:
     MapView* DrawMap;
     Mud* mud;
     Mountain* mountains;
-    WorldMap* map;
+    //WorldMap* map;
     sf::RenderWindow* window;
 };
 

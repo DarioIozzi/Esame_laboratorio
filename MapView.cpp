@@ -11,6 +11,8 @@ void MapView::Draw(sf::Vector2f p) {
     window->draw(enemyShape);
     window->draw(mudShape);
     window->draw(mountainsShape);
+    if(pg->FP)
+        window->draw(*path);
     window->display();
 }
 

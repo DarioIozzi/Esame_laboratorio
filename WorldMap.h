@@ -15,16 +15,9 @@ public:
     WorldMap() {}
     ~WorldMap() {}
 
-    void CreateMap(){
-        for(int j = 0; j<800; j++){
-            world_map[j*600] = 0;
-            for(int i = 1; i<600; i++){
-                world_map[j*600+i] = 0;
-            }
-        }
-    }
+    static void CreateMap();
 
-    void AddTP(TerrainType* tp);
+    static void AddTP(TerrainType* tp);
 
     static int getMW() {
         return MW;
@@ -34,17 +27,17 @@ public:
         return MH;
     }
 
-    int getCosto(sf::Vector2f p) {
+    static int getCosto(sf::Vector2f p) {
         int x = p.x;
         int y = p.y;
-        return world_map[(x*600)+y];
+        return world_map[(x*MH)+y];
     }
 
 private:
     static const int MW = 800;
     static const int MH = 600;
-    int world_map[MW * MH];
-    std::list<TerrainType*> TP;
+    static int world_map[MW * MH];
+    static std::list<TerrainType*> TP;
 
 };
 
