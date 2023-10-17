@@ -28,6 +28,9 @@ public:
     }
 
     static int getCosto(sf::Vector2f p) {
+        if(p.x < 0 || p.x >= MW || p.y < 0 || p.y >= MH){
+            return 9;
+        }
         int x = p.x;
         int y = p.y;
         return world_map[(x*MH)+y];

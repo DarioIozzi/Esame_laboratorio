@@ -11,8 +11,7 @@ public:
     Display() {}
     ~Display() {}
 
-    virtual void Draw(
-            sf::Vector2f) = 0;
+    virtual void Draw() = 0;
 };
 
 

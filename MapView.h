@@ -20,7 +20,7 @@ public:
 
     void update() override;
 
-    void Draw(sf::Vector2f p) override;
+    void Draw() override;
 private:
     GameCharacter* pg;
     Enemy* enemy;

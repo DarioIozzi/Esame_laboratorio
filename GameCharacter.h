@@ -44,12 +44,13 @@ public:
 
     bool FP = false;
 
+    sf::VertexArray path;
+
 private:
     std::list<Observer*> observers;
-    //WorldMap* map;
     sf::Vector2f size {20.f,20.f};
     sf::Vector2f pos;
-    sf::VertexArray path;
+
 };
 
 #endif //ESAME_LABORATORIO_GAMECHARACTER_H

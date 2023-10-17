@@ -16,7 +16,7 @@ bool NodeState::IsGoal( NodeState &nodeGoal ) const {
     return false;
 }
 
-bool NodeState::GetSuccessors( AStarSearch<NodeState> *astarsearch, NodeState *parentNode ){
+bool NodeState::GetSuccessors( AStarSearch<NodeState> *astarsearch, NodeState *parentNode ) const {
 
     float parentX = -1;
     float parentY = -1;

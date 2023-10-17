@@ -4,21 +4,21 @@
 
 #include "MapView.h"
 
-void MapView::Draw(sf::Vector2f p) {
-    pgShape.setPosition({p.x, p.y});
+void MapView::Draw() {
     window->clear();
     window->draw(pgShape);
     window->draw(enemyShape);
     window->draw(mudShape);
     window->draw(mountainsShape);
     if(pg->FP)
-        window->draw(*path);
+        window->draw(pg->path);
     window->display();
 }
 
 void MapView::update() {
-    sf::Vector2f p = pg->getPos();
-    Draw(p);
+    pgShape.setPosition({pg->getPos().x, pg->getPos().y});
+    cout << pg->getPos().x << ", " << pg->getPos().y << endl;
+    Draw();
 }
 
 MapView::MapView(GameCharacter *p, Enemy* e, sf::RenderWindow* w, TerrainType* Mountains, TerrainType* Mud) : pg(p), enemy(e), mud(Mud), mountains(Mountains){

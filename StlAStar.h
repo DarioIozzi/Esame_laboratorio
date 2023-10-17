@@ -836,14 +836,13 @@ public:
     }
     float GoalDistanceEstimate( NodeState &nodeGoal ) const;
     bool IsGoal( NodeState &nodeGoal ) const;
-    bool GetSuccessors( AStarSearch <NodeState> *astarsearch, NodeState *parentNode );
+    bool GetSuccessors( AStarSearch <NodeState> *astarsearch, NodeState *parentNode ) const;
     float GetCost(NodeState &successor) const;
     bool IsSameState( NodeState &goalState ) const;
     std::size_t Hash() const;
 
 private:
     sf::Vector2f pos;
-    //WorldMap* map;
 };
 
 #endif
