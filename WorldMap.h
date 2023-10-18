@@ -17,7 +17,7 @@ public:
 
     static void CreateMap();
 
-    static void AddTP(TerrainType* tp);
+    static void AddTT(TerrainType* tt);
 
     static int getMW() {
         return MW;
@@ -40,7 +40,7 @@ private:
     static const int MW = 800;
     static const int MH = 600;
     static int world_map[(MW + 1) * (MH + 1)];
-    static std::list<TerrainType*> TP;
+    static std::list<TerrainType*> TT;
 
 };
 

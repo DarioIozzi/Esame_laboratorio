@@ -189,7 +189,7 @@ void GameCharacter::findpath(sf::Vector2f d) {
         do {
             SearchState = astarsearch.SearchStep();
 
-#if DEBUG_LISTS
+/*#if DEBUG_LISTS
 
             cout << "Steps:" << SearchSteps << "\n";
 
@@ -223,7 +223,7 @@ void GameCharacter::findpath(sf::Vector2f d) {
                 }
 
                 cout << "Closed list has " << len << " nodes\n";
-#endif
+#endif*/
 
         } while (SearchState == AStarSearch<NodeState>::SEARCH_STATE_SEARCHING);
 

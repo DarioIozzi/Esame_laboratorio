@@ -23,7 +23,7 @@ public:
     int getCosto() const override;
 
 private:
-    const int costo = 7;
+    const int costo = 6;
     sf::Vector2f size {100.f, 100.f};
 };
 

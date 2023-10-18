@@ -31,7 +31,7 @@ private:
     sf::RenderWindow* window;
     sf::RectangleShape mudShape;
     sf::RectangleShape mountainsShape;
-    sf::VertexArray *path;
+    sf::VertexArray* path;
 };
 
 
