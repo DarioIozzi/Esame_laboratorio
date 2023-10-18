@@ -128,7 +128,7 @@ public: // methods
             m_State( SEARCH_STATE_NOT_INITIALISED ),
             m_CurrentSolutionNode( NULL ),
 #if USE_FSA_MEMORY
-            m_FixedSizeAllocator( 1000 ),
+            m_FixedSizeAllocator( 10000 ),
 #endif
             m_AllocateNodeCount(0),
             m_CancelRequest( false )
@@ -380,7 +380,6 @@ public: // methods
                     // Greg Douglas <gregdouglasmail@gmail.com>
                     // who noticed that this code path was incorrect
                     // Here we have found a new state which is already CLOSED
-
                 }
 
                     // Successor in open list
