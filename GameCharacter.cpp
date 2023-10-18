@@ -3,7 +3,7 @@
 //
 #include "GameCharacter.h"
 void GameCharacter::moveX(float x) {
-    if(pos.x + x < WorldMap::getMW() - size.x && (pos.x + x) >= 0){            //interazione terreni
+    if(pos.x + x <= WorldMap::getMW() - size.x && (pos.x + x) >= 0){            //interazione terreni
         int p1 = WorldMap::getCosto(pos);
         int p2 = WorldMap::getCosto({pos.x + size.x, pos.y});
         int p3 = WorldMap::getCosto({pos.x, pos.y + size.y});
@@ -32,15 +32,15 @@ void GameCharacter::moveX(float x) {
         if(FP)
             PathAdjustX();
     }
-    else if(pos.x + x >= WorldMap::getMW() - size.x - 1)           //Collisione bordo mappa
-        pos.x = WorldMap::getMW() - size.x - 1;
+    else if(pos.x + x >= WorldMap::getMW() - size.x)           //Collisione bordo mappa
+        pos.x = WorldMap::getMW() - size.x;
     else
         pos.x = 0;
     notify();
 }
 
 void GameCharacter::moveY(float y) {
-    if (pos.y + y < WorldMap::getMH() - size.y && (pos.y + y) >= 0) {      //Interazione terreni
+    if (pos.y + y <= WorldMap::getMH() - size.y && (pos.y + y) >= 0) {      //Interazione terreni
         int p1 = WorldMap::getCosto(pos);
         int p2 = WorldMap::getCosto({pos.x + size.x, pos.y});
         int p3 = WorldMap::getCosto({pos.x, pos.y + size.y});
@@ -67,10 +67,9 @@ void GameCharacter::moveY(float y) {
 
         if(FP)
             PathAdjustY();
-
     }
-    else if(pos.y + y >= WorldMap::getMH() - size.y - 1)           //Collisione bordo mappa
-        pos.y = WorldMap::getMH() - size.y - 1;
+    else if(pos.y + y >= WorldMap::getMH() - size.y)           //Collisione bordo mappa
+        pos.y = WorldMap::getMH() - size.y;
     else
         pos.y = 0;
     notify();
@@ -172,14 +171,14 @@ void GameCharacter::CollisionY() {
     }
 }
 
-void GameCharacter::findpath(sf::Vector2f destination) {
+void GameCharacter::findpath(sf::Vector2f d) {
 
     if(FP) {   //se FP = true il path è già stato cercato e trovato, quindi disattiviamo la rappresentazione su display
         FP = !FP;
         notify();
         return;
     }
-
+        destination = d;
         AStarSearch<NodeState> astarsearch;
         NodeState NStart(pos);
         NodeState NEnd(destination);
@@ -296,7 +295,6 @@ void GameCharacter::findpath(sf::Vector2f destination) {
             if(numLine < vertices)
                 path.resize(numLine);
 
-            cout << "Trovato, " << path.getVertexCount() << endl;
             astarsearch.FreeSolutionNodes();
 
             //se false non disegno, se true disegno
@@ -319,14 +317,10 @@ void GameCharacter::PathAdjustX() {
         path[0].position.x = pos.x;
         return;
     } else {
-        if (path[0].position == pos)
-            return;
-        path.append(sf::Vertex(pos, sf::Color::White));
-        for (int i = path.getVertexCount() - 1; i > 0; i++) {
-            path[i] = path[i - 1];
-        }
-        path[0].position = pos;
+        FP = false;                 //modifico FP altrimenti non ricalcola il percorso ma smette di disegnarlo
+        findpath(destination);
     }
+
 }
 
 void GameCharacter::PathAdjustY() {
@@ -339,12 +333,7 @@ void GameCharacter::PathAdjustY() {
         path[0].position.y = pos.y;
         return;
     } else {
-        if (path[0].position == pos)
-            return;
-        path.append(sf::Vertex(pos, sf::Color::White));
-        for (int i = path.getVertexCount() - 1; i > 0; i++) {
-            path[i] = path[i - 1];
-        }
-        path[0].position = pos;
+        FP = false;                 //modifico FP altrimenti non ricalcola il percorso ma smette di disegnarlo
+        findpath(destination);
     }
 }

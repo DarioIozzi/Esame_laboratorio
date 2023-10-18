@@ -17,7 +17,6 @@ void MapView::Draw() {
 
 void MapView::update() {
     pgShape.setPosition({pg->getPos().x, pg->getPos().y});
-    cout << pg->getPos().x << ", " << pg->getPos().y << endl;
     Draw();
 }
 

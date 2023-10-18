@@ -28,7 +28,7 @@ public:
     }
 
     static int getCosto(sf::Vector2f p) {
-        if(p.x < 0 || p.x >= MW || p.y < 0 || p.y >= MH){
+        if(p.x < 0 || p.x > MW || p.y < 0 || p.y > MH){
             return 9;
         }
         int x = p.x;
@@ -39,7 +39,7 @@ public:
 private:
     static const int MW = 800;
     static const int MH = 600;
-    static int world_map[MW * MH];
+    static int world_map[(MW + 1) * (MH + 1)];
     static std::list<TerrainType*> TP;
 
 };

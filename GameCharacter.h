@@ -11,6 +11,7 @@
 #include <list>
 #include "cmath"
 #include "StlAStar.h"
+#include "Enemy.h"
 #include <memory>
 
 class GameCharacter{
@@ -50,7 +51,7 @@ private:
     std::list<Observer*> observers;
     sf::Vector2f size {20.f,20.f};
     sf::Vector2f pos;
-
+    sf::Vector2f destination;
 };
 
 #endif //ESAME_LABORATORIO_GAMECHARACTER_H

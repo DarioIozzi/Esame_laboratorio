@@ -14,14 +14,14 @@ void WorldMap::AddTP(TerrainType *tp) {
     }
 }
 void WorldMap::CreateMap(){
-    for(int j = 0; j<MW; j++){
+    for(int j = 0; j <= MW; j++){
         world_map[j*MH] = 0;
-        for(int i = 1; i<MH; i++){
+        for(int i = 1; i <= MH; i++){
             world_map[j*MH+i] = 0;
         }
     }
 }
 
-int WorldMap::world_map[MW * MH];
+int WorldMap::world_map[(MW + 1) * (MH + 1)];
 
 std::list<TerrainType*> WorldMap::TP;
