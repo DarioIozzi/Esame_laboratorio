@@ -18,15 +18,15 @@ public:
     GameCharacter(sf::Vector2f o);
     ~GameCharacter()  = default;
 
-    sf::Vector2f getPos() const  {
+    sf::Vector2f getPos() const override{
         return pos;
     }
 
-    void moveX(float x);
-    void moveY(float y);
+    void moveX(float x) override;
+    void moveY(float y) override;
 
-    void subscribe(Observer* o);
-    void unsubscribe(Observer* o);
+    void subscribe(Observer* o) override;
+    void unsubscribe(Observer* o) override;
 
     sf::Vector2f getSize() const{
         return size;
@@ -37,7 +37,7 @@ public:
     void CollisionX();
     void CollisionY();
 
-    void notify() const;
+    void notify() const override;
 
     void PathAdjust();
 
