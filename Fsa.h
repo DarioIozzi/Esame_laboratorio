@@ -48,6 +48,7 @@ given where due.
 #include <string.h>
 #include <stdio.h>
 
+
 template <class USER_TYPE> class FixedSizeAllocator
 {
 

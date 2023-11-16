@@ -3,11 +3,11 @@
 //
 #include "GameCharacter.h"
 void GameCharacter::moveX(float x) {
-    if(pos.x + x <= WorldMap::getMW() - size.x && (pos.x + x) >= 0){            //interazione terreni
-        int p1 = WorldMap::getCosto(pos);
-        int p2 = WorldMap::getCosto({pos.x + size.x, pos.y});
-        int p3 = WorldMap::getCosto({pos.x, pos.y + size.y});
-        int p4 = WorldMap::getCosto({pos.x + size.x, pos.y + size.y});
+    if(pos.x + x <= getMW() - size.x && (pos.x + x) >= 0){            //interazione con i terreni
+        int p1 = getMapCosto(pos);
+        int p2 = getMapCosto({pos.x + size.x, pos.y});
+        int p3 = getMapCosto({pos.x, pos.y + size.y});
+        int p4 = getMapCosto({pos.x + size.x, pos.y + size.y});
 
         if (p1 != 0) {
             int c = x < 0 ? p1 : -p1;
@@ -32,19 +32,19 @@ void GameCharacter::moveX(float x) {
         if(FP)
             PathAdjustX();
     }
-    else if(pos.x + x >= WorldMap::getMW() - size.x)           //Collisione bordo mappa
-        pos.x = WorldMap::getMW() - size.x;
+    else if(pos.x + x >= getMW() - size.x)           //Collisione bordo mappa
+        pos.x = getMW() - size.x;
     else
         pos.x = 0;
     notify();
 }
 
 void GameCharacter::moveY(float y) {
-    if (pos.y + y <= WorldMap::getMH() - size.y && (pos.y + y) >= 0) {      //Interazione terreni
-        int p1 = WorldMap::getCosto(pos);
-        int p2 = WorldMap::getCosto({pos.x + size.x, pos.y});
-        int p3 = WorldMap::getCosto({pos.x, pos.y + size.y});
-        int p4 = WorldMap::getCosto({pos.x + size.x, pos.y + size.y});
+    if (pos.y + y <= getMH() - size.y && (pos.y + y) >= 0) {      //Interazione terreni
+        int p1 = getMapCosto(pos);
+        int p2 = getMapCosto({pos.x + size.x, pos.y});
+        int p3 = getMapCosto({pos.x, pos.y + size.y});
+        int p4 = getMapCosto({pos.x + size.x, pos.y + size.y});
         if (p1 != 0) {
             int c = y < 0 ? p1 : -p1;
             pos.y += y + c;
@@ -68,8 +68,8 @@ void GameCharacter::moveY(float y) {
         if(FP)
             PathAdjustY();
     }
-    else if(pos.y + y >= WorldMap::getMH() - size.y)           //Collisione bordo mappa
-        pos.y = WorldMap::getMH() - size.y;
+    else if(pos.y + y >= getMH() - size.y)           //Collisione bordo mappa
+        pos.y = getMH() - size.y;
     else
         pos.y = 0;
     notify();
@@ -94,36 +94,36 @@ GameCharacter::GameCharacter(sf::Vector2f o) {
 }
 
 void GameCharacter::CollisionX() {
-    if (WorldMap::getCosto(pos) == 9) {
+    if (getMapCosto(pos) == 9) {
         for (int j = 1; j < 11; j++) {
-            if (WorldMap::getCosto({pos.x + j, pos.y}) != 9) {
+            if (getMapCosto({pos.x + j, pos.y}) != 9) {
                 pos.x += j;
                 break;
             }
         }
         return;
     }
-    if (WorldMap::getCosto({pos.x, pos.y + size.y}) == 9) {
+    if (getMapCosto({pos.x, pos.y + size.y}) == 9) {
         for (int j = 1; j < 11; j++) {
-            if (WorldMap::getCosto({pos.x + j, pos.y + size.y}) != 9) {
+            if (getMapCosto({pos.x + j, pos.y + size.y}) != 9) {
                 pos.x += j;
                 break;
             }
         }
         return;
     }
-    if (WorldMap::getCosto({pos.x + size.x, pos.y}) == 9) {
+    if (getMapCosto({pos.x + size.x, pos.y}) == 9) {
         for (int j = 1; j < 11; j++) {
-            if (WorldMap::getCosto({pos.x + size.x - j, pos.y}) != 9) {
+            if (getMapCosto({pos.x + size.x - j, pos.y}) != 9) {
                 pos.x -= j;
                 break;
             }
         }
         return;
     }
-    if (WorldMap::getCosto({pos.x + size.x, pos.y + size.y}) == 9) {
+    if (getMapCosto({pos.x + size.x, pos.y + size.y}) == 9) {
         for (int j = 1; j < 11; j++) {
-            if (WorldMap::getCosto({pos.x + size.x - j, pos.y + size.y}) != 9) {
+            if (getMapCosto({pos.x + size.x - j, pos.y + size.y}) != 9) {
                 pos.x -= j;
                 break;
             }
@@ -133,36 +133,36 @@ void GameCharacter::CollisionX() {
 }
 
 void GameCharacter::CollisionY() {
-    if (WorldMap::getCosto(pos) == 9) {
+    if (getMapCosto(pos) == 9) {
         for (int i = 1; i < 11; i++) {
-            if (WorldMap::getCosto({pos.x, pos.y + i}) != 9) {
+            if (getMapCosto({pos.x, pos.y + i}) != 9) {
                 pos.y += i;
                 break;
             }
         }
         return;
     }
-    if (WorldMap::getCosto({pos.x + size.x, pos.y}) == 9) {
+    if (getMapCosto({pos.x + size.x, pos.y}) == 9) {
         for (int i = 1; i < 11; i++) {
-            if (WorldMap::getCosto({pos.x + size.x, pos.y + i}) != 9){
+            if (getMapCosto({pos.x + size.x, pos.y + i}) != 9){
                 pos.y += i;
                 break;
             }
         }
         return;
     }
-    if (WorldMap::getCosto({pos.x, pos.y + size.y}) == 9) {
+    if (getMapCosto({pos.x, pos.y + size.y}) == 9) {
         for (int i = 1; i < 11; i++) {
-            if (WorldMap::getCosto({pos.x, pos.y + size.y - i}) != 9) {
+            if (getMapCosto({pos.x, pos.y + size.y - i}) != 9) {
                 pos.y -= i;
                 break;
             }
         }
         return;
     }
-    if (WorldMap::getCosto({pos.x + size.x, pos.y + size.y}) == 9) {
+    if (getMapCosto({pos.x + size.x, pos.y + size.y}) == 9) {
         for (int i = 1; i < 11; i++) {
-            if (WorldMap::getCosto({pos.x + size.x, pos.y + size.y - i}) != 9) {
+            if (getMapCosto({pos.x + size.x, pos.y + size.y - i}) != 9) {
                 pos.y -= i;
                 break;
             }

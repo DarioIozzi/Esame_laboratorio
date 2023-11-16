@@ -3,27 +3,24 @@ project(Esame_laboratorio)
 
 set(CMAKE_CXX_STANDARD 14)
 
+add_subdirectory(test)
+
 add_executable(Esame_laboratorio
         main.cpp
-        GameCharacter.cpp
         GameCharacter.h
+        GameCharacter.cpp
         Observer.h
-        MapView.cpp
         MapView.h
-        Controller.cpp
+        MapView.cpp
         Controller.h
+        Controller.cpp
         Display.h
         StlAStar.h
+        StlAStar.cpp
         Fsa.h
-        TerrainType.h
-        Mud.cpp
-        Mud.h
-        Mountain.cpp
-        Mountain.h
         WorldMap.h
         WorldMap.cpp
         Enemy.h
-        StlAStar.cpp
 )
 
 set(SFML_STATIC_LIBRARIES TRUE)

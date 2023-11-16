@@ -8,8 +8,6 @@
 
 #include <iostream>
 #include "MapView.h"
-#include "Mud.h"
-#include "Mountain.h"
 
 class Controller {
 public:
@@ -22,8 +20,6 @@ private:
     GameCharacter* pg;
     Enemy* enemy;
     MapView* DrawMap;
-    Mud* mud;
-    Mountain* mountains;
     sf::RenderWindow* window;
 };
 

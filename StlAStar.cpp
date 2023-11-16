@@ -28,22 +28,22 @@ bool NodeState::GetSuccessors( AStarSearch<NodeState> *astarsearch, NodeState *p
 
     NodeState NewNode;
 
-    if( (WorldMap::getCosto( {pos.x - 1, pos.y} ) < 9) && !((parentX == pos.x - 1) && (parentY == pos.y))){
+    if( (getMapCosto( {pos.x - 1, pos.y} ) < 9) && !((parentX == pos.x - 1) && (parentY == pos.y))){
         NewNode = NodeState( {pos.x - 1, pos.y} );
         astarsearch->AddSuccessor( NewNode );
     }
 
-    if( (WorldMap::getCosto( {pos.x, pos.y - 1} ) < 9) && !((parentX == pos.x) && (parentY == pos.y - 1))){
+    if( (getMapCosto( {pos.x, pos.y - 1} ) < 9) && !((parentX == pos.x) && (parentY == pos.y - 1))){
         NewNode = NodeState( {pos.x, pos.y - 1} );
         astarsearch->AddSuccessor( NewNode );
     }
 
-    if( (WorldMap::getCosto({ pos.x + 1, pos.y }) < 9) && !((parentX == pos.x + 1) && (parentY == pos.y))){
+    if( (getMapCosto({ pos.x + 1, pos.y }) < 9) && !((parentX == pos.x + 1) && (parentY == pos.y))){
         NewNode = NodeState( {pos.x + 1, pos.y} );
         astarsearch->AddSuccessor( NewNode );
     }
 
-    if( (WorldMap::getCosto({ pos.x, pos.y + 1 }) < 9) && !((parentX == pos.x) && (parentY == pos.y + 1))){
+    if( (getMapCosto({ pos.x, pos.y + 1 }) < 9) && !((parentX == pos.x) && (parentY == pos.y + 1))){
         NewNode = NodeState( {pos.x, pos.y + 1} );
         astarsearch->AddSuccessor( NewNode );
     }
@@ -52,7 +52,7 @@ bool NodeState::GetSuccessors( AStarSearch<NodeState> *astarsearch, NodeState *p
 }
 
 float NodeState::GetCost(NodeState &successor) const {
-    return static_cast<float>(WorldMap::getCosto({ pos.x, pos.y }));
+    return static_cast<float>(getMapCosto({ pos.x, pos.y }));
 }
 
 bool NodeState::IsSameState( NodeState &goalState ) const {

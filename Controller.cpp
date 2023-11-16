@@ -18,12 +18,8 @@ void Controller::Commands() {
 }
 
 Controller::Controller(sf::RenderWindow* w) : window(w) {
-    WorldMap::CreateMap();
-    mud = new Mud({300, 150});
-    WorldMap::AddTT(mud);
-    mountains = new Mountain({300, 400});
-    WorldMap::AddTT(mountains);
+    CreateMap();
     pg = new GameCharacter({0, 0});
     enemy = new Enemy({200, 500});
-    DrawMap = new MapView(pg, enemy, w, mountains, mud);
+    DrawMap = new MapView(pg, enemy, w);
 }

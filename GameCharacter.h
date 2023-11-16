@@ -9,7 +9,6 @@
 #include "Observer.h"
 #include "SFML/Graphics.hpp"
 #include <list>
-#include "cmath"
 #include "StlAStar.h"
 #include "Enemy.h"
 #include <memory>
@@ -38,7 +37,7 @@ public:
     void CollisionX();
     void CollisionY();
 
-    void notify() const;
+    void notify() const;            //TODO
 
     void PathAdjustX();
     void PathAdjustY();

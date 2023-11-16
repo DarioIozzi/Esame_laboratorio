@@ -11,11 +11,10 @@
 #include "Enemy.h"
 #include "GameCharacter.h"
 #include "Display.h"
-#include "TerrainType.h"
 
 class MapView : public Observer, public Display{
 public:
-    MapView(GameCharacter* p, Enemy* e, sf::RenderWindow* w, TerrainType* Mountains, TerrainType* Mud);
+    MapView(GameCharacter* p, Enemy* e, sf::RenderWindow* w);
     ~MapView() override;
 
     void update() override;
@@ -24,8 +23,6 @@ public:
 private:
     GameCharacter* pg;
     Enemy* enemy;
-    TerrainType* mountains;
-    TerrainType* mud;
     sf::RectangleShape pgShape;
     sf::RectangleShape enemyShape;
     sf::RenderWindow* window;

@@ -20,24 +20,29 @@ void MapView::update() {
     Draw();
 }
 
-MapView::MapView(GameCharacter *p, Enemy* e, sf::RenderWindow* w, TerrainType* Mountains, TerrainType* Mud) : pg(p), enemy(e), mud(Mud), mountains(Mountains){
+MapView::MapView(GameCharacter *p, Enemy* e, sf::RenderWindow* w) : pg(p), enemy(e){
+    //personaggio
     pg->subscribe(this);
     pgShape.setSize(pg->getSize());
     pgShape.setOrigin(0.f, 0.f);
     pgShape.setPosition(pg->getPos());
     pgShape.setFillColor(sf::Color::Red);
+    //nemico
     enemyShape.setSize(enemy->getSize());
     enemyShape.setOrigin(0.f, 0.f);
     enemyShape.setPosition(enemy->getPos());
     enemyShape.setFillColor(sf::Color::White);
-    mudShape.setSize(mud->getSize());
+    //mud
+    mudShape.setSize(mudSize);
     mudShape.setOrigin(0.f, 0.f);
-    mudShape.setPosition(mud->getPos());
+    mudShape.setPosition(mudPos);
     mudShape.setFillColor(sf::Color::Cyan);
-    mountainsShape.setSize(mountains->getSize());
+    //mountains
+    mountainsShape.setSize(mountainSize);
     mountainsShape.setOrigin(0.f, 0.f);
-    mountainsShape.setPosition(mountains->getPos());
+    mountainsShape.setPosition(mountainPos);
     mountainsShape.setFillColor(sf::Color::White);
+    //finestra
     window = w;
     window->clear();
     window->draw(enemyShape);

@@ -5,43 +5,31 @@
 #ifndef ESAME_LABORATORIO_WORLDMAP_H
 #define ESAME_LABORATORIO_WORLDMAP_H
 
-#include "TerrainType.h"
-#include <cmath>
-#include <list>
+#include "SFML/Graphics.hpp"
 
-class WorldMap{
-public:
+    enum TerrainType{
+        normal = 0,
+        mud = 6,
+        mountains = 9
+    };
 
-    WorldMap() {}
-    ~WorldMap() {}
+    const int MW = 800;
+    const int MH = 600;
 
-    static void CreateMap();
+    //dimensione e posizione di mud
+    const sf::Vector2f mudSize = {100, 100};
+    const sf::Vector2f mudPos = {300, 150};
 
-    static void AddTT(TerrainType* tt);
+    //dimensione e posizione di mountains
+    const sf::Vector2f mountainSize = {100, 100};
+    const sf::Vector2f mountainPos = {300, 400};
 
-    static int getMW() {
-        return MW;
-    }
+    void CreateMap();
 
-    static int getMH() {
-        return MH;
-    }
+    int getMW();
 
-    static int getCosto(sf::Vector2f p) {
-        if(p.x < 0 || p.x > MW || p.y < 0 || p.y > MH){
-            return 9;
-        }
-        int x = p.x;
-        int y = p.y;
-        return world_map[(x*MH)+y];
-    }
+    int getMH();
 
-private:
-    static const int MW = 800;
-    static const int MH = 600;
-    static int world_map[(MW + 1) * (MH + 1)];
-    static std::list<TerrainType*> TT;
-
-};
+    int getMapCosto(sf::Vector2f p);
 
 #endif //ESAME_LABORATORIO_WORLDMAP_H

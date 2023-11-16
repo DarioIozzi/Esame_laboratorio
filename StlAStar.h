@@ -39,7 +39,6 @@ using namespace std;
 #include <cfloat>
 #include <SFML/Graphics.hpp>
 #include "WorldMap.h"
-
 // fast fixed size memory allocator, used for fast node memory management
 #include "Fsa.h"
 
