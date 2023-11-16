@@ -37,10 +37,9 @@ public:
     void CollisionX();
     void CollisionY();
 
-    void notify() const;            //TODO
+    void notify() const;
 
-    void PathAdjustX();
-    void PathAdjustY();
+    void PathAdjust();
 
     bool FP = false;
 
