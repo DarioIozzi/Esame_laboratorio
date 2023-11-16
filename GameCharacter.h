@@ -39,8 +39,7 @@ public:
 
     void notify() const;            //TODO
 
-    void PathAdjustX();
-    void PathAdjustY();
+    void PathAdjust();
 
     bool FP = false;
 

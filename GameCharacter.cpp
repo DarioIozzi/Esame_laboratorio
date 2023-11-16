@@ -30,7 +30,7 @@ void GameCharacter::moveX(float x) {
         CollisionX();
 
         if(FP)
-            PathAdjustX();
+            PathAdjust();
     }
     else if(pos.x + x >= getMW() - size.x)           //Collisione bordo mappa
         pos.x = getMW() - size.x;
@@ -66,7 +66,7 @@ void GameCharacter::moveY(float y) {
         CollisionY();
 
         if(FP)
-            PathAdjustY();
+            PathAdjust();
     }
     else if(pos.y + y >= getMH() - size.y)           //Collisione bordo mappa
         pos.y = getMH() - size.y;
@@ -307,33 +307,7 @@ void GameCharacter::findpath(sf::Vector2f d) {
         astarsearch.EnsureMemoryFreed();
 }
 
-void GameCharacter::PathAdjustX() {
-    if (path[1].position == pos) {
-        for (int i = 0; i < path.getVertexCount() - 1; i++)
-            path[i] = path[i + 1];
-        path.resize(path.getVertexCount() - 1);
-        return;
-    } else if (path[0].position.y == path[1].position.y) {
-        path[0].position.x = pos.x;
-        return;
-    } else {
+void GameCharacter::PathAdjust() {
         FP = false;                 //modifico FP altrimenti non ricalcola il percorso ma smette di disegnarlo
         findpath(destination);
-    }
-
-}
-
-void GameCharacter::PathAdjustY() {
-    if (path[1].position == pos) {
-        for (int i = 0; i < path.getVertexCount() - 1; i++)
-            path[i] = path[i + 1];
-        path.resize(path.getVertexCount() - 1);
-        return;
-    } else if (path[0].position.x == path[1].position.x) {
-        path[0].position.y = pos.y;
-        return;
-    } else {
-        FP = false;                 //modifico FP altrimenti non ricalcola il percorso ma smette di disegnarlo
-        findpath(destination);
-    }
 }
