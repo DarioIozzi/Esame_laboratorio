@@ -6,14 +6,14 @@
 #define ESAME_LABORATORIO_GAMECHARACTER_H
 
 
-#include "Observer.h"
 #include "SFML/Graphics.hpp"
 #include <list>
 #include "StlAStar.h"
 #include "Enemy.h"
+#include "Subject.h"
 #include <memory>
 
-class GameCharacter{
+class GameCharacter : public Subject{
 public:
     GameCharacter(sf::Vector2f o);
     ~GameCharacter()  = default;
