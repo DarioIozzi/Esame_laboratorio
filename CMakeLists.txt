@@ -21,6 +21,7 @@ add_executable(Esame_laboratorio
         WorldMap.h
         WorldMap.cpp
         Enemy.h
+        Subject.h
 )
 
 set(SFML_STATIC_LIBRARIES TRUE)
