@@ -89,7 +89,7 @@ void GameCharacter::notify() const {
     }
 }
 
-GameCharacter::GameCharacter(sf::Vector2f o) {
+GameCharacter::GameCharacter(sf::Vector2f o){
     pos = o;
 }
 
