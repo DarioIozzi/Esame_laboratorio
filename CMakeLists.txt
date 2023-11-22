@@ -31,4 +31,4 @@ set(SFML_DIR D:/SFML/lib/cmake/SFML)
 find_package(SFML COMPONENTS system window graphics audio network REQUIRED)
 
 include_directories(D:/SFML/include)
-target_link_libraries(Esame_laboratorio sfml-system sfml-audio sfml-window sfml-graphics sfml-network sfml-main core)
+target_link_libraries(Esame_laboratorio sfml-system sfml-audio sfml-window sfml-graphics sfml-network sfml-main)

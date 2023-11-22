@@ -6,7 +6,7 @@
 #define ESAME_LABORATORIO_GAMECHARACTER_H
 
 
-#include "SFML/Graphics.hpp"
+#include <SFML/Graphics.hpp>
 #include <list>
 #include "StlAStar.h"
 #include "Enemy.h"

@@ -190,42 +190,6 @@ void GameCharacter::findpath(sf::Vector2f d) {
         do {
             SearchState = astarsearch.SearchStep();
 
-/*#if DEBUG_LISTS
-
-            cout << "Steps:" << SearchSteps << "\n";
-
-                int len = 0;
-
-                cout << "Open:\n";
-                MapSearchNode *p = astarsearch.GetOpenListStart();
-                while( p )
-                {
-                    len++;
-#if !DEBUG_LIST_LENGTHS_ONLY
-                    ((MapSearchNode *)p)->PrintNodeInfo();
-#endif
-                    p = astarsearch.GetOpenListNext();
-
-                }
-
-                cout << "Open list has " << len << " nodes\n";
-
-                len = 0;
-
-                cout << "Closed:\n";
-                p = astarsearch.GetClosedListStart();
-                while( p )
-                {
-                    len++;
-#if !DEBUG_LIST_LENGTHS_ONLY
-                    p->PrintNodeInfo();
-#endif
-                    p = astarsearch.GetClosedListNext();
-                }
-
-                cout << "Closed list has " << len << " nodes\n";
-#endif*/
-
         } while (SearchState == AStarSearch<NodeState>::SEARCH_STATE_SEARCHING);
 
         if (SearchState == AStarSearch<NodeState>::SEARCH_STATE_SUCCEEDED) {
