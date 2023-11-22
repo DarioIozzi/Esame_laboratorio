@@ -14,18 +14,19 @@ void CreateMap() {
         }
     }
 
-    for (int i = mudPos.y + 1; i < mudPos.y + mudSize.y; i++) {
-        for (int j = mudPos.x + 1; j < mudPos.x + mudSize.x; j++) {
-            world_map[(j * MH) + i] = TerrainType::mud;
-        }
-    }
+    CreateTT(mudSize, mudPos, mud);
 
-    for (int i = mountainPos.y + 1; i < mountainPos.y + mountainSize.y; i++) {
-        for (int j = mountainPos.x + 1; j < mountainPos.x + mountainSize.x; j++) {
-            world_map[(j * MH) + i] = TerrainType::mountains;
+    CreateTT(mountainSize, mountainPos, mountains);
+}
+
+void CreateTT(sf::Vector2f size, sf::Vector2f pos, TerrainType tt){
+    for (int i = pos.y + 1; i < pos.y + size.y; i++) {
+        for (int j = pos.x + 1; j < pos.x + size.x; j++) {
+            world_map[(j * MH) + i] = tt;
         }
     }
 }
+
 
 int getMW() {
     return MW;

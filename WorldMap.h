@@ -26,6 +26,8 @@
 
     void CreateMap();
 
+    void CreateTT(sf::Vector2f size, sf::Vector2f pos, TerrainType);
+
     int getMW();
 
     int getMH();
