@@ -15,8 +15,8 @@
 
 class GameCharacter : public Subject{
 public:
-    GameCharacter(sf::Vector2f o);
-    ~GameCharacter()  = default;
+    GameCharacter(sf::Vector2f o, sf::Vector2f s = {20, 20});
+    ~GameCharacter() {}
 
     sf::Vector2f getPos() const{
         return pos;
@@ -47,7 +47,7 @@ public:
 
 private:
     std::list<Observer*> observers;
-    sf::Vector2f size {20.f,20.f};
+    sf::Vector2f size;
     sf::Vector2f pos;
     sf::Vector2f destination;
 };

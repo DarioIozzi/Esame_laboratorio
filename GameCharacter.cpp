@@ -89,8 +89,9 @@ void GameCharacter::notify() const {
     }
 }
 
-GameCharacter::GameCharacter(sf::Vector2f o){
+GameCharacter::GameCharacter(sf::Vector2f o, sf::Vector2f s){
     pos = o;
+    size = s;
 }
 
 void GameCharacter::CollisionX() {
