@@ -1,5 +1,4 @@
 cmake_minimum_required(VERSION 3.20)
-project(Test)
 
 add_subdirectory(googletest-main)
 set(gtest_SOURCE_DIR, ./googletest/)

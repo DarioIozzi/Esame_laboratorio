@@ -1,7 +1,6 @@
 #include "gtest/gtest.h"
 #include "../GameCharacter.h"
 #include "../Controller.h"
-#include <SFML/Graphics.hpp>
 
 TEST(GameCharacter, FindpathTest){
     sf::RenderWindow window(sf::VideoMode(800, 600), "pathTest");
