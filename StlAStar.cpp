@@ -28,31 +28,35 @@ bool NodeState::GetSuccessors( AStarSearch<NodeState> *astarsearch, NodeState *p
 
     NodeState NewNode;
 
-    if( (getMapCosto( {pos.x - 1, pos.y} ) < 9) && !((parentX == pos.x - 1) && (parentY == pos.y))){
-        NewNode = NodeState( {pos.x - 1, pos.y} );
+    if( (getMapCosto( {pos.x - 10, pos.y} ) < 9) && !((parentX == pos.x - 10) && (parentY == pos.y))
+    && (getMapCosto({pos.x - 10, pos.y}) != 9) && (getMapCosto({pos.x - 10, pos.y + 20}) != 9)){
+        NewNode = NodeState( {pos.x - 10, pos.y} );
         astarsearch->AddSuccessor( NewNode );
     }
 
-    if( (getMapCosto( {pos.x, pos.y - 1} ) < 9) && !((parentX == pos.x) && (parentY == pos.y - 1))){
-        NewNode = NodeState( {pos.x, pos.y - 1} );
+    if( (getMapCosto( {pos.x, pos.y - 10} ) < 9) && !((parentX == pos.x) && (parentY == pos.y - 10))
+    && (getMapCosto({pos.x, pos.y - 10}) != 9)  && (getMapCosto({pos.x + 20, pos.y - 10}) != 9)){
+        NewNode = NodeState( {pos.x, pos.y - 10} );
         astarsearch->AddSuccessor( NewNode );
     }
 
-    if( (getMapCosto({ pos.x + 1, pos.y }) < 9) && !((parentX == pos.x + 1) && (parentY == pos.y))){
-        NewNode = NodeState( {pos.x + 1, pos.y} );
+    if( (getMapCosto({ pos.x + 10, pos.y }) < 9) && !((parentX == pos.x + 10) && (parentY == pos.y))
+    && (getMapCosto({pos.x + 30, pos.y}) != 9)  && (getMapCosto({pos.x + 30, pos.y + 20}) != 9)){
+        NewNode = NodeState( {pos.x + 10, pos.y} );
         astarsearch->AddSuccessor( NewNode );
     }
 
-    if( (getMapCosto({ pos.x, pos.y + 1 }) < 9) && !((parentX == pos.x) && (parentY == pos.y + 1))){
-        NewNode = NodeState( {pos.x, pos.y + 1} );
+    if( (getMapCosto({ pos.x, pos.y + 10 }) < 9) && !((parentX == pos.x) && (parentY == pos.y + 10))
+    && (getMapCosto({pos.x, pos.y + 30}) != 9) && (getMapCosto({pos.x + 20, pos.y + 30}) != 9)){
+        NewNode = NodeState( {pos.x, pos.y + 10} );
         astarsearch->AddSuccessor( NewNode );
     }
 
     return true;
 }
 
-float NodeState::GetCost(NodeState &successor) const {
-    return static_cast<float>(getMapCosto({ pos.x, pos.y }));
+float NodeState::GetCost() const {
+    return static_cast<float>(getMapCosto({pos.x, pos.y }));
 }
 
 bool NodeState::IsSameState( NodeState &goalState ) const {
