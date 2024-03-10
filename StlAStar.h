@@ -127,7 +127,7 @@ public: // methods
             m_State( SEARCH_STATE_NOT_INITIALISED ),
             m_CurrentSolutionNode( NULL ),
 #if USE_FSA_MEMORY
-            m_FixedSizeAllocator( 10000 ),
+            m_FixedSizeAllocator( 1000000 ),
 #endif
             m_AllocateNodeCount(0),
             m_CancelRequest( false )
@@ -292,7 +292,7 @@ public: // methods
             for( typename vector< Node * >::iterator successor = m_Successors.begin(); successor != m_Successors.end(); successor ++ )
             {
                 // 	The g value for this successor ...
-                float newg = n->g + n->m_UserState.GetCost((*successor)->m_UserState);
+                float newg = n->g + n->m_UserState.GetCost();
 
                 // Now we need to find whether the node is on the open or closed lists
                 // If it is but the node that is already on them is better (lower g)
@@ -835,7 +835,7 @@ public:
     float GoalDistanceEstimate( NodeState &nodeGoal ) const;
     bool IsGoal( NodeState &nodeGoal ) const;
     bool GetSuccessors( AStarSearch <NodeState> *astarsearch, NodeState *parentNode ) const;
-    float GetCost(NodeState &successor) const;
+    float GetCost() const;
     bool IsSameState( NodeState &goalState ) const;
     std::size_t Hash() const;
 
