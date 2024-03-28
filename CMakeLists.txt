@@ -3,7 +3,7 @@ project(Esame_laboratorio)
 
 set(CMAKE_CXX_STANDARD 14)
 
-add_subdirectory(test)
+
 
 set(source_files
         main.cpp
@@ -26,9 +26,10 @@ set(source_files
 add_executable(Esame_laboratorio ${source_files})
 add_library(core ${source_files})
 
-set(SFML_STATIC_LIBRARIES TRUE)
+#set(SFML_STATIC_LIBRARIES TRUE)
 set(SFML_DIR D:/SFML/lib/cmake/SFML)
 find_package(SFML COMPONENTS system window graphics audio network REQUIRED)
-
+add_subdirectory(test)
 include_directories(D:/SFML/include)
+
 target_link_libraries(Esame_laboratorio sfml-system sfml-audio sfml-window sfml-graphics sfml-network sfml-main)
