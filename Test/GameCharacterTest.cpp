@@ -3,9 +3,10 @@
 #include "../Controller.h"
 
 TEST(GameCharacter, FindpathTest){
-    sf::RenderWindow window(sf::VideoMode(800, 600), "pathTest");
+    sf::RenderWindow window(sf::VideoMode(800, 600), "FindpathTest");
     Controller game(&window);
-    CreateTT({800, 70}, {0, 280}, mud);
+    CreateTT({391, 70}, {0, 280}, mountains);
+    CreateTT({390, 70}, {410, 280}, mountains);
     while(window.isOpen()){
         sf::Event event{};
         while(window.pollEvent(event)){

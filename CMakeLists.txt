@@ -26,7 +26,6 @@ set(source_files
 add_executable(Esame_laboratorio ${source_files})
 add_library(core ${source_files})
 
-#set(SFML_STATIC_LIBRARIES TRUE)
 set(SFML_DIR D:/SFML/lib/cmake/SFML)
 find_package(SFML COMPONENTS system window graphics audio network REQUIRED)
 add_subdirectory(test)
