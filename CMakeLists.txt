@@ -21,7 +21,8 @@ set(source_files
         WorldMap.h
         WorldMap.cpp
         Enemy.h
-        Subject.h)
+        Subject.h
+        TerrainType.h)
 
 add_executable(Esame_laboratorio ${source_files})
 add_library(core ${source_files})

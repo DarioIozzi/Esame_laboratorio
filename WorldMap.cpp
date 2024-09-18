@@ -14,19 +14,18 @@ void CreateMap() {
         }
     }
 
-    CreateTT(mudSize, mudPos, mud);
-
-    CreateTT(mountainSize, mountainPos, mountains);
+    CreateTT();
 }
 
-void CreateTT(sf::Vector2f size, sf::Vector2f pos, TerrainType tt){
-    for (int i = pos.y + 1; i < pos.y + size.y; i++) {
-        for (int j = pos.x + 1; j < pos.x + size.x; j++) {
-            world_map[(j * MH) + i] = tt;
+void CreateTT(){
+    for(TerrainType* t : TT) {
+        for (int i = t->getPos().y + 1; i < t->getPos().y + t->getSize().y; i++) {
+            for (int j = t->getPos().x + 1; j < t->getPos().x + t->getSize().x; j++) {
+                world_map[(j * MH) + i] = t->getTT();
+            }
         }
     }
 }
-
 
 int getMW() {
     return MW;
@@ -38,9 +37,13 @@ int getMH() {
 
 int getMapCosto(sf::Vector2f p) {
     if (p.x < 0 || p.x > MW || p.y < 0 || p.y > MH) {
-        return 9;
+        return mountains;
     }
     int x = p.x;
     int y = p.y;
     return world_map[(x * MH) + y];
+}
+
+void addTT(TerrainType* t){
+    TT.push_back(t);
 }

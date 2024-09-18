@@ -15,7 +15,7 @@
 
 class GameCharacter : public Subject{
 public:
-    GameCharacter(sf::Vector2f o, sf::Vector2f s = {20, 20});
+    explicit GameCharacter(sf::Vector2f o, sf::Vector2f s = {20,20});
     ~GameCharacter() {}
 
     sf::Vector2f getPos() const{
@@ -44,6 +44,8 @@ public:
     bool FP = false;
 
     sf::VertexArray path;
+
+    sf::RectangleShape pgShape;
 
 private:
     std::list<Observer*> observers;

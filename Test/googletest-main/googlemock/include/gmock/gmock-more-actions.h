@@ -81,7 +81,7 @@
 //
 //   ActionName<t1, ..., t_m>(v1, ..., v_n)
 //
-// where the ts are the template arguments and the vs are the value
+// where the TerrainShape are the template arguments and the vs are the value
 // arguments.  The value argument types are inferred by the compiler.
 // If you want to explicitly specify the value argument types, you can
 // provide additional template arguments:

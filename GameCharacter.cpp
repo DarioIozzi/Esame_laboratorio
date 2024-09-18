@@ -90,8 +90,14 @@ void GameCharacter::notify() const {
 }
 
 GameCharacter::GameCharacter(sf::Vector2f o, sf::Vector2f s){
+    if(o.x < 0 || o.y < 0 || o.x > 780 || o.y > 580 || getMapCosto(o) == mountains)
+        o = {0,0};
     pos = o;
     size = s;
+    pgShape.setSize(s);
+    pgShape.setOrigin(0.f, 0.f);
+    pgShape.setPosition(o);
+    pgShape.setFillColor(sf::Color::Red);
 }
 
 void GameCharacter::CollisionX() {

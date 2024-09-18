@@ -11,6 +11,7 @@
 #include "Enemy.h"
 #include "GameCharacter.h"
 #include "Display.h"
+#include "WorldMap.h"
 
 class MapView : public Observer, public Display{
 public:
@@ -23,11 +24,7 @@ public:
 private:
     GameCharacter* pg;
     Enemy* enemy;
-    sf::RectangleShape pgShape;
-    sf::RectangleShape enemyShape;
     sf::RenderWindow* window;
-    sf::RectangleShape mudShape;
-    sf::RectangleShape mountainsShape;
     sf::VertexArray* path;
 };
 
