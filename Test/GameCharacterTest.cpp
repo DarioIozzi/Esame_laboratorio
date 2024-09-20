@@ -1,13 +1,12 @@
 #include "gtest/gtest.h"
-#include "../GameCharacter.h"
 #include "../Controller.h"
 
 TEST(GameCharacter, FindpathTest){
     sf::RenderWindow window(sf::VideoMode(800, 600), "FindpathTest");
     TerrainType Mountain1({391, 70}, {0, 280}, mountains);
     TerrainType Mountain2({390, 70}, {410, 280}, mountains);
-    addTT(Mountain1);
-    addTT(Mountain2);
+    addTT(&Mountain1);
+    addTT(&Mountain2);
     Controller game(&window);
     while(window.isOpen()){
         sf::Event event{};

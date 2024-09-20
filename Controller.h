@@ -11,7 +11,7 @@
 
 class Controller {
 public:
-    explicit Controller(sf::RenderWindow* window);
+    explicit Controller(sf::RenderWindow* w);
     ~Controller() {}
 
     void Commands();
@@ -20,7 +20,6 @@ private:
     GameCharacter* pg;
     Enemy* enemy;
     MapView* DrawMap;
-    sf::RenderWindow* window;
 };
 
 

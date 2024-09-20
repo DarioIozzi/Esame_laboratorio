@@ -30,6 +30,6 @@
 
     void addTT(TerrainType* t);
 
-    std::list<TerrainType*> TTs;
+    std::list<TerrainType*>* getListPointer();
 
 #endif //ESAME_LABORATORIO_WORLDMAP_H

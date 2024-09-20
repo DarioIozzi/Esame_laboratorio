@@ -6,6 +6,8 @@
 
 int world_map[(MW + 1) * (MH + 1)];
 
+std::list<TerrainType*> TTs;
+
 void CreateMap() {
     for (int j = 0; j <= MW; j++) {
         world_map[j * MH] = 0;
@@ -18,7 +20,7 @@ void CreateMap() {
 }
 
 void CreateTT(){
-    for(TerrainType* t : TTs) {
+    for(auto t : TTs) {
         for (int i = t->getPos().y + 1; i < t->getPos().y + t->getSize().y; i++) {
             for (int j = t->getPos().x + 1; j < t->getPos().x + t->getSize().x; j++) {
                 world_map[(j * MH) + i] = t->getTT();
@@ -46,4 +48,8 @@ int getMapCosto(sf::Vector2f p) {
 
 void addTT(TerrainType* t){
     TTs.push_back(t);
+}
+
+std::list<TerrainType*>* getListPointer(){
+    return &TTs;
 }

@@ -7,7 +7,6 @@
 
 #include "SFML/Graphics.hpp"
 #include "Observer.h"
-#include <list>
 
 class Subject {
 public:

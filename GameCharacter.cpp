@@ -2,6 +2,7 @@
 // Created by dario on 12/08/21.
 //
 #include "GameCharacter.h"
+
 void GameCharacter::moveX(float x) {
     if(pos.x + x <= getMW() - size.x && (pos.x + x) >= 0){            //interazione con i terreni
         int p1 = getMapCosto(pos);

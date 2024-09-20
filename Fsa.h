@@ -45,8 +45,8 @@ given where due.
 #ifndef FSA_H
 #define FSA_H
 
-#include <string.h>
-#include <stdio.h>
+#include <cstring>
+#include <cstdio>
 
 
 template <class USER_TYPE> class FixedSizeAllocator

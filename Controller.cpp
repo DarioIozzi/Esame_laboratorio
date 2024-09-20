@@ -17,9 +17,9 @@ void Controller::Commands() {
         pg->findpath(enemy->getPos());
 }
 
-Controller::Controller(sf::RenderWindow* w) : window(w) {
+Controller::Controller(sf::RenderWindow* w) {
     CreateMap();
     pg = new GameCharacter({0, 0});
     enemy = new Enemy({600, 500});
-    DrawMap = new MapView(pg, enemy, window);
+    DrawMap = new MapView(pg, enemy, w);
 }

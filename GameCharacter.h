@@ -7,11 +7,9 @@
 
 
 #include <SFML/Graphics.hpp>
-#include <list>
 #include "StlAStar.h"
 #include "Enemy.h"
 #include "Subject.h"
-#include <memory>
 
 class GameCharacter : public Subject{
 public:
