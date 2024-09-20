@@ -18,7 +18,7 @@ void CreateMap() {
 }
 
 void CreateTT(){
-    for(TerrainType* t : TT) {
+    for(TerrainType* t : TTs) {
         for (int i = t->getPos().y + 1; i < t->getPos().y + t->getSize().y; i++) {
             for (int j = t->getPos().x + 1; j < t->getPos().x + t->getSize().x; j++) {
                 world_map[(j * MH) + i] = t->getTT();
@@ -45,5 +45,5 @@ int getMapCosto(sf::Vector2f p) {
 }
 
 void addTT(TerrainType* t){
-    TT.push_back(t);
+    TTs.push_back(t);
 }

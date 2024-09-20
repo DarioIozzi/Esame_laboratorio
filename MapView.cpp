@@ -8,7 +8,7 @@ void MapView::Draw() {
     window->clear();
     window->draw(pg->pgShape);
     window->draw(enemy->enemyShape);
-    for(TerrainType* t : TT)
+    for(TerrainType* t : TTs)
         window->draw(t->TerrainShape);
     if(pg->FP)
         window->draw(pg->path);
@@ -28,7 +28,7 @@ MapView::MapView(GameCharacter *p, Enemy* e, sf::RenderWindow* w) : pg(p), enemy
     window->clear();
     window->draw(enemy->enemyShape);
     window->draw(pg->pgShape);
-    for(TerrainType* t : TT)
+    for(TerrainType* t : TTs)
         window->draw(t->TerrainShape);
     window->display();
 }
