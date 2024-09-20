@@ -28,7 +28,7 @@
 
     int getMapCosto(sf::Vector2f p);
 
-    void addTT(TerrainType t);
+    void addTT(TerrainType* t);
 
     std::list<TerrainType*> TTs;
 

@@ -21,5 +21,5 @@ Controller::Controller(sf::RenderWindow* w) : window(w) {
     CreateMap();
     pg = new GameCharacter({0, 0});
     enemy = new Enemy({600, 500});
-    DrawMap = new MapView(pg, enemy, w);
+    DrawMap = new MapView(pg, enemy, window);
 }

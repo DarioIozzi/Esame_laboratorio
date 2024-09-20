@@ -9,8 +9,8 @@ int main() {
     sf::RenderWindow window(sf::VideoMode(WinWidth, WinHeight), "Esame laboratorio");
     TerrainType Mountain({100, 100}, {300, 400}, mountains);
     TerrainType Mud({100, 100}, {300, 400}, mud);
-    addTT(Mountain);
-    addTT(Mud);
+    addTT(&Mountain);
+    addTT(&Mud);
     Controller game(&window);
     while(window.isOpen()){
         sf::Event event{};

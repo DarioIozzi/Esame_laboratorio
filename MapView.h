@@ -11,7 +11,6 @@
 #include "Enemy.h"
 #include "GameCharacter.h"
 #include "Display.h"
-#include "WorldMap.h"
 
 class MapView : public Observer, public Display{
 public:
