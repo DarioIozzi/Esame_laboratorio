@@ -19,7 +19,7 @@ void Controller::Commands() {
 
 Controller::Controller(sf::RenderWindow* w) {
     CreateMap();
-    pg = new GameCharacter({0, 0});
+    pg = new GameCharacter();
     enemy = new Enemy({600, 500});
     DrawMap = new MapView(pg, enemy, w);
 }

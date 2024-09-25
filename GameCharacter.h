@@ -13,7 +13,7 @@
 
 class GameCharacter : public Subject{
 public:
-    explicit GameCharacter(sf::Vector2f o, sf::Vector2f s = {20,20});
+    explicit GameCharacter(sf::Vector2f o = {0, 0}, sf::Vector2f s = {20,20});
     ~GameCharacter() {}
 
     sf::Vector2f getPos() const{
@@ -23,14 +23,13 @@ public:
     void moveX(float x);
     void moveY(float y);
 
+    void setPos(sf::Vector2f p);
+
     void subscribe(Observer* o) override;
     void unsubscribe(Observer* o) override;
+    int numObservers();
 
     void notify() const override;
-
-    sf::Vector2f getSize() const{
-        return size;
-    }
 
     void findpath(sf::Vector2f destination);
 

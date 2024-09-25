@@ -826,7 +826,7 @@ private: // data
 class NodeState {
 public:
     NodeState() {}
-    explicit NodeState(sf::Vector2f p) : pos(p) {}
+    explicit NodeState(sf::Vector2f p, sf::Vector2f s) : pos(p), PGSize(s) {}
     ~NodeState() {}
 
     sf::Vector2f getPos(){
@@ -841,6 +841,7 @@ public:
 
 private:
     sf::Vector2f pos;
+    sf::Vector2f PGSize;
 };
 
 #endif

@@ -76,12 +76,20 @@ void GameCharacter::moveY(float y) {
     notify();
 }
 
+void GameCharacter::setPos(sf::Vector2f p){
+    pos = p;
+}
+
 void GameCharacter::subscribe(Observer* o) {
     observers.push_back(o);
 }
 
 void GameCharacter::unsubscribe(Observer* o) {
     observers.remove(o);
+}
+
+int GameCharacter::numObservers(){
+    return observers.size();
 }
 
 void GameCharacter::notify() const {
@@ -103,7 +111,7 @@ GameCharacter::GameCharacter(sf::Vector2f o, sf::Vector2f s){
 
 void GameCharacter::CollisionX() {
     if (getMapCosto(pos) == 9) {
-        for (int j = 1; j < 11; j++) {
+        for (int j = 1; j < size.x/2 + 1; j++) {
             if (getMapCosto({pos.x + j, pos.y}) != 9) {
                 pos.x += j;
                 break;
@@ -112,7 +120,7 @@ void GameCharacter::CollisionX() {
         return;
     }
     if (getMapCosto({pos.x, pos.y + size.y}) == 9) {
-        for (int j = 1; j < 11; j++) {
+        for (int j = 1; j < size.x/2 + 1; j++) {
             if (getMapCosto({pos.x + j, pos.y + size.y}) != 9) {
                 pos.x += j;
                 break;
@@ -121,7 +129,7 @@ void GameCharacter::CollisionX() {
         return;
     }
     if (getMapCosto({pos.x + size.x, pos.y}) == 9) {
-        for (int j = 1; j < 11; j++) {
+        for (int j = 1; j < size.x/2 + 1; j++) {
             if (getMapCosto({pos.x + size.x - j, pos.y}) != 9) {
                 pos.x -= j;
                 break;
@@ -130,7 +138,7 @@ void GameCharacter::CollisionX() {
         return;
     }
     if (getMapCosto({pos.x + size.x, pos.y + size.y}) == 9) {
-        for (int j = 1; j < 11; j++) {
+        for (int j = 1; j < size.x/2 + 1; j++) {
             if (getMapCosto({pos.x + size.x - j, pos.y + size.y}) != 9) {
                 pos.x -= j;
                 break;
@@ -142,7 +150,7 @@ void GameCharacter::CollisionX() {
 
 void GameCharacter::CollisionY() {
     if (getMapCosto(pos) == 9) {
-        for (int i = 1; i < 11; i++) {
+        for (int i = 1; i < size.y/2 + 1; i++) {
             if (getMapCosto({pos.x, pos.y + i}) != 9) {
                 pos.y += i;
                 break;
@@ -151,7 +159,7 @@ void GameCharacter::CollisionY() {
         return;
     }
     if (getMapCosto({pos.x + size.x, pos.y}) == 9) {
-        for (int i = 1; i < 11; i++) {
+        for (int i = 1; i < size.y/2 + 1; i++) {
             if (getMapCosto({pos.x + size.x, pos.y + i}) != 9){
                 pos.y += i;
                 break;
@@ -160,7 +168,7 @@ void GameCharacter::CollisionY() {
         return;
     }
     if (getMapCosto({pos.x, pos.y + size.y}) == 9) {
-        for (int i = 1; i < 11; i++) {
+        for (int i = 1; i < size.y/2 + 1; i++) {
             if (getMapCosto({pos.x, pos.y + size.y - i}) != 9) {
                 pos.y -= i;
                 break;
@@ -169,7 +177,7 @@ void GameCharacter::CollisionY() {
         return;
     }
     if (getMapCosto({pos.x + size.x, pos.y + size.y}) == 9) {
-        for (int i = 1; i < 11; i++) {
+        for (int i = 1; i < size.y/2 + 1; i++) {
             if (getMapCosto({pos.x + size.x, pos.y + size.y - i}) != 9) {
                 pos.y -= i;
                 break;
@@ -186,97 +194,96 @@ void GameCharacter::findpath(sf::Vector2f d) {
         notify();
         return;
     }
-        destination = d;
-        AStarSearch<NodeState> astarsearch;
-        NodeState NStart(pos);
-        NodeState NEnd(destination);
-        astarsearch.SetStartAndGoalStates(NStart, NEnd);
+    destination = d;
+    AStarSearch<NodeState> astarsearch;
+    NodeState NStart(pos, size);
+    NodeState NEnd(destination, {0, 0});
+    astarsearch.SetStartAndGoalStates(NStart, NEnd);
 
-        unsigned int SearchState;
+    unsigned int SearchState;
 
-        do {
-            SearchState = astarsearch.SearchStep();
+    do {
+        SearchState = astarsearch.SearchStep();
 
-        } while (SearchState == AStarSearch<NodeState>::SEARCH_STATE_SEARCHING);
+    } while (SearchState == AStarSearch<NodeState>::SEARCH_STATE_SEARCHING);
 
-        if (SearchState == AStarSearch<NodeState>::SEARCH_STATE_SUCCEEDED) {
+    if (SearchState == AStarSearch<NodeState>::SEARCH_STATE_SUCCEEDED) {
 
-            int vertices = 10;
-            path.setPrimitiveType(sf::LineStrip);
-            path.resize(vertices);
-            int numLine = 0;
+        int vertices = 10;
+        path.setPrimitiveType(sf::LineStrip);
+        path.resize(vertices);
+        int numLine = 0;
 
-            NodeState *node = astarsearch.GetSolutionStart();
-            path[numLine].position = node->getPos();
+        NodeState *node = astarsearch.GetSolutionStart();
+        path[numLine].position = node->getPos();
 
-            bool x = false;     //true se c'è movimento sull'asse x
-            NodeState* prevNode = node;
+        bool x = false;     //true se c'è movimento sull'asse x
+        NodeState* prevNode = node;
+        node = astarsearch.GetSolutionNext();
+        if(prevNode->getPos().y == node->getPos().y) //direzione iniziale
+            x = true;
+        numLine++;
+
+
+        for (;;) {
+
+            prevNode = node;
             node = astarsearch.GetSolutionNext();
-            if(prevNode->getPos().y == node->getPos().y) //direzione iniziale
-                x = true;
-            numLine++;
 
 
-            for (;;) {
+            if(node == nullptr)
+                break;
 
-                prevNode = node;
-                node = astarsearch.GetSolutionNext();
-
-
-                if(node == nullptr)
-                    break;
-
-                //Creazione vettore di vertici per rappresentare il percorso da fare
-                if(!x) {
-                    if(prevNode->getPos().y == node->getPos().y)   //se cambia la direzione modifico
-                        x = true;
-                    if(x) {                 //se la direzione è cambiata creo un nuovo vertice
-                        if (numLine < vertices) {
-                            path[numLine].position = prevNode->getPos();
-                            numLine++;
-                        } else {
-                            path.append(sf::Vertex(prevNode->getPos()));
-                            numLine++;
-                        }
-                    }
-                }
-                else{
-                    if(prevNode->getPos().x == node->getPos().x)    //se cambia la direzione modifico
-                        x = false;
-                    if(!x) {                //se la direzione è cambiata creo un nuovo vertice
-                        if (numLine < vertices) {
-                            path[numLine].position = prevNode->getPos();
-                            numLine++;
-                        }
-                        else {
-                            path.append(sf::Vertex(prevNode->getPos()));
-                            numLine++;
-                        }
+            //Creazione vettore di vertici per rappresentare il percorso da fare
+            if(!x) {
+                if(prevNode->getPos().y == node->getPos().y)   //se cambia la direzione modifico
+                    x = true;
+                if(x) {                 //se la direzione è cambiata creo un nuovo vertice
+                    if (numLine < vertices) {
+                        path[numLine].position = prevNode->getPos();
+                        numLine++;
+                    } else {
+                        path.append(sf::Vertex(prevNode->getPos()));
+                        numLine++;
                     }
                 }
             }
-
-            //Qui si aggiunge un vertice con le coordinate della destinazione
-            if(numLine < vertices) {
-                path[numLine].position = destination;
-                numLine++;
-            }else
-                path.append(sf::Vertex(destination));
-
-            //se i vertici sono minori della dimensione di default ridimensiono il vettore
-            if(numLine < vertices)
-                path.resize(numLine);
-
-            astarsearch.FreeSolutionNodes();
-
-            //se false non disegno, se true disegno
-            FP = !FP;
-            notify();
-        } else if (SearchState == AStarSearch<NodeState>::SEARCH_STATE_FAILED) {
-            cout << "Impossibile raggiungere la destinazione" << endl;
-
+            else{
+                if(prevNode->getPos().x == node->getPos().x)    //se cambia la direzione modifico
+                    x = false;
+                if(!x) {                //se la direzione è cambiata creo un nuovo vertice
+                    if (numLine < vertices) {
+                        path[numLine].position = prevNode->getPos();
+                        numLine++;
+                    }
+                    else {
+                        path.append(sf::Vertex(prevNode->getPos()));
+                        numLine++;
+                    }
+                }
+            }
         }
-        astarsearch.EnsureMemoryFreed();
+
+        //Qui si aggiunge un vertice con le coordinate della destinazione
+        if(numLine < vertices) {
+            path[numLine].position = destination;
+            numLine++;
+        }else
+            path.append(sf::Vertex(destination));
+
+        //se i vertici sono minori della dimensione di default ridimensiono il vettore
+        if(numLine < vertices)
+            path.resize(numLine);
+
+        astarsearch.FreeSolutionNodes();
+
+        //se false non disegno, se true disegno
+        FP = !FP;
+        notify();
+    } else if (SearchState == AStarSearch<NodeState>::SEARCH_STATE_FAILED) {
+        cout << "Impossibile raggiungere la destinazione" << endl;
+    }
+    astarsearch.EnsureMemoryFreed();
 }
 
 void GameCharacter::PathAdjust() {

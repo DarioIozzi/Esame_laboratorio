@@ -4,7 +4,7 @@ add_subdirectory(googletest-main)
 set(gtest_SOURCE_DIR, ./googletest/)
 include_directories(${gtest_SOURCE_DIR}/include ${gtest_SOURCE_DIR})
 
-set(testSourceFiles runAllTests.cpp GameCharacterTest.cpp)
+set(testSourceFiles runAllTests.cpp GameCharacterTest.cpp GameCharacterFixture.cpp TerrainTypeTest.cpp)
 add_executable(runTest ${testSourceFiles})
 
 #set(SFML_STATIC_LIBRARIES TRUE)

@@ -29,26 +29,26 @@ bool NodeState::GetSuccessors( AStarSearch<NodeState> *astarsearch, NodeState *p
     NodeState NewNode;
 
     if( (getMapCosto( {pos.x - 1, pos.y} ) < 9) && !((parentX == pos.x - 1) && (parentY == pos.y))
-    && (getMapCosto({pos.x - 1, pos.y + 20}) != 9)){
-        NewNode = NodeState( {pos.x - 1, pos.y} );
+    && (getMapCosto({pos.x - 1, pos.y + PGSize.y}) != 9)){
+        NewNode = NodeState( {pos.x - 1, pos.y}, {PGSize});
         astarsearch->AddSuccessor( NewNode );
     }
 
-    if( (getMapCosto( {pos.x, pos.y - 1} ) < 9) && !((parentX == pos.x) && (parentY == pos.y - 10))
-    && (getMapCosto({pos.x + 20, pos.y - 1}) != 9)){
-        NewNode = NodeState( {pos.x, pos.y - 1} );
+    if( (getMapCosto( {pos.x, pos.y - 1} ) < 9) && !((parentX == pos.x) && (parentY == pos.y - PGSize.y/2))
+    && (getMapCosto({pos.x + PGSize.x, pos.y - 1}) != 9)){
+        NewNode = NodeState( {pos.x, pos.y - 1}, PGSize );
         astarsearch->AddSuccessor( NewNode );
     }
 
     if( (getMapCosto({ pos.x + 1, pos.y }) < 9) && !((parentX == pos.x + 1) && (parentY == pos.y))
-    && (getMapCosto({pos.x + 21, pos.y}) != 9)  && (getMapCosto({pos.x + 21, pos.y + 20}) != 9)){
-        NewNode = NodeState( {pos.x + 1, pos.y} );
+    && (getMapCosto({pos.x + PGSize.x + 1, pos.y}) != 9)  && (getMapCosto({pos.x + PGSize.x + 1, pos.y + PGSize.y}) != 9)){
+        NewNode = NodeState( {pos.x + 1, pos.y}, PGSize );
         astarsearch->AddSuccessor( NewNode );
     }
 
     if( (getMapCosto({ pos.x, pos.y + 1 }) < 9) && !((parentX == pos.x) && (parentY == pos.y + 1))
-    && (getMapCosto({pos.x, pos.y + 21}) != 9) && (getMapCosto({pos.x + 20, pos.y + 21}) != 9)){
-        NewNode = NodeState( {pos.x, pos.y + 1} );
+    && (getMapCosto({pos.x, pos.y + PGSize.y + 1}) != 9) && (getMapCosto({pos.x + PGSize.x, pos.y + PGSize.y + 1}) != 9)){
+        NewNode = NodeState( {pos.x, pos.y + 1}, PGSize );
         astarsearch->AddSuccessor( NewNode );
     }
 
