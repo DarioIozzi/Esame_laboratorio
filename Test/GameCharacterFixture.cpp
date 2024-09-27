@@ -32,13 +32,8 @@ TEST_F(GameCharacterSuite, FindImpossiblePathTest){
     Controller game(&window);
     while(window.isOpen()){
     sf::Event event{};
-        while(window.pollEvent(event)){
-            if(event.type == sf::Event::Closed)
-                window.close();
-            if(event.type == sf::Event::KeyPressed) {
-                game.Commands();
-            }
-        }
+    pg.findpath({600, 500});
+    window.close();
     }
     ASSERT_EQ(false, pg.FP);
 }
