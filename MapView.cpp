@@ -6,10 +6,10 @@
 
 void MapView::Draw() {
     window->clear();
-    window->draw(pg->pgShape);
-    window->draw(enemy->enemyShape);
     for(auto t : *getListPointer())
         window->draw(t->TerrainShape);
+    window->draw(pg->pgShape);
+    window->draw(enemy->enemyShape);
     if(pg->FP)
         window->draw(pg->path);
     window->display();
@@ -26,10 +26,11 @@ MapView::MapView(GameCharacter *p, Enemy* e, sf::RenderWindow* w) : pg(p), enemy
     //finestra
     window = w;
     window->clear();
-    window->draw(enemy->enemyShape);
-    window->draw(pg->pgShape);
     for(auto t : *getListPointer())
         window->draw(t->TerrainShape);
+    window->draw(enemy->enemyShape);
+    window->draw(pg->pgShape);
+
     window->display();
 }
 

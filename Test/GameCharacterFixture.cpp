@@ -1,6 +1,8 @@
 //
 // Created by Dario on 25/09/2024.
 //
+#include<chrono>
+#include <thread>
 #include "gtest/gtest.h"
 #include "../Controller.h"
 
@@ -31,9 +33,9 @@ TEST_F(GameCharacterSuite, FindImpossiblePathTest){
     addTT(&Mountain2);
     Controller game(&window);
     while(window.isOpen()){
-    sf::Event event{};
-    pg.findpath({600, 500});
-    window.close();
+        pg.findpath({600, 500});
+        std::this_thread::sleep_for(2000ms);
+        window.close();
     }
     ASSERT_EQ(false, pg.FP);
 }
