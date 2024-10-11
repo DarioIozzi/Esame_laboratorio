@@ -6,9 +6,5 @@
 #include "../TerrainType.h"
 
 TEST(TerrainType, Constructor){
-    try {
-        TerrainType t({-5, 900}, {900, -500}, 3);
-    }catch(std::invalid_argument const &e){
-        std::cerr << e.what() << std::endl;
-    }
+    EXPECT_THROW(TerrainType t({-5, 900}, {900, -500}, 3), std::invalid_argument);
 }

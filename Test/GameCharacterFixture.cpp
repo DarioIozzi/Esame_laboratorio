@@ -32,7 +32,7 @@ TEST_F(GameCharacterSuite, FindImpossiblePathTest){
     addTT(&Mountain1);
     addTT(&Mountain2);
     Controller game(&window);
-    pg.findpath({600, 500});
+    pg.findpath({600, 250});
     std::this_thread::sleep_for(2000ms);
     removeTT();
     window.close();
