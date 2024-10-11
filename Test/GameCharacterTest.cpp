@@ -10,7 +10,7 @@ TEST(GameCharacter, Constructor){
 TEST(GameCharacter, Movement){
     GameCharacter pg;
     pg.moveX(10);
-    pg.moveY(5);
-    ASSERT_EQ(10, pg.getPos().x);
-    ASSERT_EQ(5, pg.getPos().y);
+    pg.moveY(20);
+    ASSERT_EQ(9, pg.getPos().x);
+    ASSERT_EQ(19, pg.getPos().y);
 }

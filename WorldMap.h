@@ -10,7 +10,7 @@
 #include "TerrainType.h"
 
     enum terrtype{
-        normal = 0,
+        normal = 1,
         mud = 6,
         mountains = 9
     };
@@ -29,6 +29,8 @@
     int getMapCosto(sf::Vector2f p);
 
     void addTT(TerrainType* t);
+
+    void removeTT();
 
     std::list<TerrainType*>* getListPointer();
 

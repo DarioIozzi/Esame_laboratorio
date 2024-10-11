@@ -10,7 +10,7 @@ std::list<TerrainType*> TTs;
 
 void CreateMap() {
     for (int j = 0; j <= MW; j++) {
-        world_map[j * MH] = 0;
+        world_map[j * MH] = normal;
         for (int i = 1; i <= MH; i++) {
             world_map[j * MH + i] = normal;
         }
@@ -48,6 +48,10 @@ int getMapCosto(sf::Vector2f p) {
 
 void addTT(TerrainType* t){
     TTs.push_back(t);
+}
+
+void removeTT(){
+    TTs.clear();
 }
 
 std::list<TerrainType*>* getListPointer(){

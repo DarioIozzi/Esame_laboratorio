@@ -6,22 +6,16 @@
 #define ESAME_LABORATORIO_TERRAINTYPE_H
 
 #include "SFML/Graphics.hpp"
-
+#include <exception>
 
 class TerrainType {
 
 public:
     TerrainType(sf::Vector2f s, sf::Vector2f p, int t){
-        if(s.x < 0 || s.x > 800)
-            s.x = 10;
-        if(s.y < 0 || s.y > 600)
-            s.y = 10;
-        if(p.x < 0 || p.x > 800)
-            p.x = 100;
-        if(p.y < 0 || p.y > 800)
-            p.y = 100;
-        if(t != 0 && t != 6 && t != 9)
-            t = 0;
+        if(s.x < 0 || s.x > 800 ||  p.x < 0 || p.x > 800 || s.y < 0 || s.y > 600 || p.y < 0 || p.y > 800)
+            throw std::invalid_argument("Almeno uno dei valori è non valido, probabilmente negativo");
+        if(t != 6 && t != 9)
+            t = 9;
         Size = s;
         Pos = p;
         tt = t;
